@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import AdaptiveSVG from '../components/ui/AdaptiveSVG'
 
 const Home = () => {
   return (
@@ -26,47 +27,166 @@ const Home = () => {
 
       {/* Qué es OncoDerma */}
       <section className="card">
-        <h2 className="text-3xl font-semibold text-primary mb-6 text-center">
-          ¿Qué es OncoDerma?
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <p className="text-gray-700 mb-4 leading-relaxed">
-              OncoDerma es una aplicación innovadora que utiliza inteligencia artificial para analizar imágenes de la piel 
-              y proporcionar una estimación del riesgo de cáncer de piel.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Nuestra tecnología está diseñada para ser una herramienta de apoyo que ayude tanto a pacientes como a 
-              profesionales de la salud en la detección temprana de posibles anomalías en la piel.
-            </p>
-            <div className="bg-accent/10 p-6 rounded-lg mt-6">
-              <h3 className="text-xl font-semibold text-secondary mb-4">Características principales:</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                  Análisis rápido con IA avanzada
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                  Interfaz fácil de usar
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                  Resultados visuales claros
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                  Privacidad garantizada
-                </li>
-              </ul>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="bg-accent/10 p-3 rounded-full mr-4">
+              <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-primary">¿Qué es OncoDerma?</h2>
+              <p className="text-sm text-gray-600">Inteligencia artificial para análisis dermatológico</p>
             </div>
           </div>
-          <div className="flex justify-center">
-            <img 
-              src="/img/medical-analysis.svg" 
-              alt="Análisis médico con IA" 
-              className="w-full max-w-md h-auto"
-            />
+          <div className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+            </svg>
+            IA Avanzada
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {/* Descripción principal */}
+          <div className="md:col-span-2 space-y-4">
+            <div className="bg-gradient-to-r from-cyan-50 to-cyan-100 p-4 rounded-lg">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-bold text-primary text-sm mb-2">Aplicación Innovadora</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    OncoDerma utiliza inteligencia artificial para analizar imágenes de la piel 
+                    y proporcionar estimaciones del riesgo de cáncer de piel.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-teal-50 to-teal-100 p-4 rounded-lg">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-bold text-primary text-sm mb-2">Herramienta de Apoyo</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Diseñada para ayudar tanto a pacientes como a profesionales de la salud 
+                    en la detección temprana de anomalías en la piel.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Características en grid compacto */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-primary">IA Avanzada</p>
+                    <p className="text-xs text-gray-600">Análisis rápido</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-50 to-green-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-primary">Fácil de usar</p>
+                    <p className="text-xs text-gray-600">Interfaz intuitiva</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-primary">Resultados claros</p>
+                    <p className="text-xs text-gray-600">Visuales precisos</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-primary">Privacidad</p>
+                    <p className="text-xs text-gray-600">Datos seguros</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Información técnica compacta */}
+          <div className="bg-gradient-to-br from-accent/5 to-secondary/5 p-4 rounded-lg">
+            <h4 className="font-bold text-secondary mb-3 text-sm flex items-center">
+              <span className="w-2 h-2 bg-accent rounded-full mr-2"></span>
+              Tecnología Médica
+            </h4>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Dermatología digital</p>
+                  <p className="text-xs text-gray-600">Análisis especializado</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Detección temprana</p>
+                  <p className="text-xs text-gray-600">Prevención efectiva</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Apoyo médico</p>
+                  <p className="text-xs text-gray-600">Herramienta profesional</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -161,136 +281,318 @@ const Home = () => {
 
       {/* Seguridad y privacidad */}
       <section className="card">
-        <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-          Seguridad y Privacidad
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 className="text-xl font-semibold text-secondary mb-4">Tu privacidad es nuestra prioridad</h3>
-            <ul className="space-y-3 text-gray-700 mb-6">
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                Las imágenes se procesan temporalmente y se eliminan inmediatamente
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                No almacenamos ninguna información personal ni médica
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                Comunicación cifrada con protocolo HTTPS
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-                Cumplimiento con estándares de seguridad médica
-              </li>
-            </ul>
-            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
-              <h4 className="font-semibold text-green-800 mb-3">🔒 Proceso seguro:</h4>
-              <ol className="space-y-2 text-green-700 text-sm">
-                <li>1. Imagen se sube de forma cifrada</li>
-                <li>2. Se procesa en servidor seguro</li>
-                <li>3. Se genera el análisis</li>
-                <li>4. Imagen se elimina automáticamente</li>
-                <li>5. Solo recibes el resultado</li>
-              </ol>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="bg-accent/10 p-3 rounded-full mr-4">
+              <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-primary">Seguridad y Privacidad</h2>
+              <p className="text-sm text-gray-600">Tu privacidad es nuestra prioridad</p>
             </div>
           </div>
-          <div className="flex justify-center">
-            <img 
-              src="/img/security-privacy.svg" 
-              alt="Seguridad y privacidad de datos" 
-              className="w-full max-w-md h-auto"
-            />
+          <div className="bg-green-600/10 text-green-600 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            Certificado
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {/* Características de privacidad */}
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex items-center p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-primary text-sm">Eliminación automática</p>
+                <p className="text-xs text-gray-600">Imágenes borradas inmediatamente</p>
+              </div>
+            </div>
+
+            <div className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-primary text-sm">Sin almacenamiento</p>
+                <p className="text-xs text-gray-600">No guardamos información personal</p>
+              </div>
+            </div>
+
+            <div className="flex items-center p-3 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-primary text-sm">Cifrado HTTPS</p>
+                <p className="text-xs text-gray-600">Comunicación completamente segura</p>
+              </div>
+            </div>
+
+            <div className="flex items-center p-3 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-primary text-sm">Estándares médicos</p>
+                <p className="text-xs text-gray-600">Cumplimiento normativo completo</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Proceso seguro compacto */}
+          <div className="bg-gradient-to-br from-accent/5 to-secondary/5 p-4 rounded-lg">
+            <h4 className="font-bold text-secondary mb-3 text-sm flex items-center">
+              <span className="w-2 h-2 bg-accent rounded-full mr-2"></span>
+              Proceso Seguro
+            </h4>
+            <div className="space-y-2">
+              {[
+                { step: 1, text: "Subida cifrada", color: "from-accent to-secondary" },
+                { step: 2, text: "Análisis protegido", color: "from-secondary to-accent" },
+                { step: 3, text: "Resultado privado", color: "from-accent to-secondary" },
+                { step: 4, text: "Eliminación automática", color: "from-secondary to-accent" },
+                { step: 5, text: "Datos seguros", color: "from-accent to-secondary" }
+              ].map((item) => (
+                <div key={item.step} className="flex items-center group">
+                  <div className={`bg-gradient-to-r ${item.color} text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mr-2 group-hover:scale-110 transition-transform duration-200`}>
+                    {item.step}
+                  </div>
+                  <span className="text-xs text-primary font-medium">{item.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Resultados confiables */}
-      <section className="card bg-gradient-to-r from-accent/5 to-secondary/5">
-        <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-          Resultados Confiables
-        </h2>
-        
-        <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-          <div>
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              Nuestro modelo de inteligencia artificial ha sido entrenado con miles de imágenes dermatológicas 
-              para proporcionar análisis precisos y confiables.
-            </p>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-secondary mb-1">95%</div>
-                <p className="text-xs text-gray-600">Precisión</p>
+      <section className="card">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="bg-secondary/10 p-3 rounded-full mr-4">
+              <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-primary">Resultados Confiables</h2>
+              <p className="text-sm text-gray-600">IA entrenada con miles de imágenes dermatológicas</p>
+            </div>
+          </div>
+          <div className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            Verificado
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-4">
+          {/* Métricas principales */}
+          <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-primary">95%</div>
+                  <p className="text-xs text-gray-600">Precisión</p>
+                </div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-secondary mb-1">&lt;30s</div>
-                <p className="text-xs text-gray-600">Análisis</p>
+              <div className="w-full bg-blue-200 rounded-full h-2">
+                <div className="bg-blue-500 h-2 rounded-full" style={{ width: '95%' }}></div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div className="text-2xl font-bold text-secondary mb-1">24/7</div>
-                <p className="text-xs text-gray-600">Disponible</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-primary">&lt;30s</div>
+                  <p className="text-xs text-gray-600">Análisis</p>
+                </div>
+              </div>
+              <div className="w-full bg-green-200 rounded-full h-2">
+                <div className="bg-green-500 h-2 rounded-full" style={{ width: '85%' }}></div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-primary">24/7</div>
+                  <p className="text-xs text-gray-600">Disponible</p>
+                </div>
+              </div>
+              <div className="w-full bg-purple-200 rounded-full h-2">
+                <div className="bg-purple-500 h-2 rounded-full" style={{ width: '100%' }}></div>
               </div>
             </div>
           </div>
-          <div className="flex justify-center">
-            <img 
-              src="/img/ai-technology.svg" 
-              alt="Tecnología de IA avanzada" 
-              className="w-full max-w-md h-auto"
-            />
+
+          {/* Información adicional compacta */}
+          <div className="bg-gradient-to-br from-accent/5 to-secondary/5 p-4 rounded-lg">
+            <h4 className="font-bold text-secondary mb-3 text-sm flex items-center">
+              <span className="w-2 h-2 bg-secondary rounded-full mr-2"></span>
+              Tecnología IA
+            </h4>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Miles de imágenes</p>
+                  <p className="text-xs text-gray-600">Dataset entrenado</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Algoritmos avanzados</p>
+                  <p className="text-xs text-gray-600">Deep Learning</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-6 h-6 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center mr-2">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-primary">Validación médica</p>
+                  <p className="text-xs text-gray-600">Supervisado</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Testimonios */}
       <section className="card">
-        <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-          Testimonios
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-            <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="bg-yellow-500/10 p-3 rounded-full mr-4">
+              <svg className="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-primary">Testimonios</h2>
+              <p className="text-sm text-gray-600">Experiencias reales de nuestros usuarios</p>
+            </div>
+          </div>
+          <div className="bg-yellow-500/10 text-yellow-600 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            5 Estrellas
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Testimonio de paciente */}
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+            <div className="flex items-start mb-3">
+              <AdaptiveSVG 
+                src="/img/avatar-maria-gonzalez.svg" 
+                alt="María González" 
+                className="w-12 h-12 rounded-full mr-3 border-2 border-blue-300 group-hover:scale-110 transition-transform duration-200"
+                darkFilter={false}
+              />
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-primary text-sm">María González</h4>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-gray-600 mb-2">Paciente</p>
+              </div>
+            </div>
+            <p className="text-sm text-primary italic leading-relaxed">
               "OncoDerma me ayudó a detectar una lesión sospechosa que no había notado. 
               Gracias a la recomendación, consulté con mi dermatólogo a tiempo."
             </p>
-            <div className="flex items-center">
-              <img 
-                src="/img/avatar-maria-gonzalez.svg" 
-                alt="María González" 
-                className="w-14 h-14 rounded-full mr-4 border-2 border-accent/20"
-              />
-              <div>
-                <p className="font-semibold text-primary text-lg">María González</p>
-                <p className="text-sm text-gray-600">Paciente</p>
-                <div className="flex mt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-sm">⭐</span>
-                  ))}
-                </div>
-              </div>
+            <div className="mt-3 flex items-center text-xs text-gray-600">
+              <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Detección temprana exitosa
             </div>
           </div>
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-            <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">
+
+          {/* Testimonio de médico */}
+          <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+            <div className="flex items-start mb-3">
+              <AdaptiveSVG 
+                src="/img/avatar-dr-carlos-ruiz.svg" 
+                alt="Dr. Carlos Ruiz" 
+                className="w-12 h-12 rounded-full mr-3 border-2 border-green-300 group-hover:scale-110 transition-transform duration-200"
+                darkFilter={false}
+              />
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-primary text-sm">Dr. Carlos Ruiz</h4>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-gray-600 mb-2">Dermatólogo Certificado</p>
+              </div>
+            </div>
+            <p className="text-sm text-primary italic leading-relaxed">
               "Como dermatólogo, encuentro que OncoDerma es una excelente herramienta de apoyo 
               para el screening inicial de mis pacientes."
             </p>
-            <div className="flex items-center">
-              <img 
-                src="/img/avatar-dr-carlos-ruiz.svg" 
-                alt="Dr. Carlos Ruiz" 
-                className="w-14 h-14 rounded-full mr-4 border-2 border-secondary/20"
-              />
-              <div>
-                <p className="font-semibold text-primary text-lg">Dr. Carlos Ruiz</p>
-                <p className="text-sm text-gray-600">Dermatólogo Certificado</p>
-                <div className="flex mt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-sm">⭐</span>
-                  ))}
-                </div>
-              </div>
+            <div className="mt-3 flex items-center text-xs text-gray-600">
+              <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              Herramienta profesional validada
             </div>
           </div>
         </div>
@@ -298,35 +600,105 @@ const Home = () => {
 
       {/* Legal */}
       <section className="card">
-        <h2 className="text-3xl font-semibold text-primary mb-6 text-center">
-          Información Legal y Responsabilidades
-        </h2>
-        <div className="space-y-6">
-
-          
-          {/* Términos adicionales */}
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2"></span>
-                Esta aplicación es solo para fines educativos y de demostración
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2"></span>
-                No debe utilizarse como único criterio para decisiones médicas
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2"></span>
-                Los desarrolladores no se hacen responsables por decisiones médicas basadas en esta aplicación
-              </li>
-              <li className="flex items-start">
-                <span className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2"></span>
-                El uso de esta aplicación implica la aceptación de estos términos
-              </li>
-            </ul>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="bg-red-500/10 p-3 rounded-full mr-4">
+              <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-primary">Información Legal</h2>
+              <p className="text-sm text-gray-600">Términos importantes y responsabilidades</p>
+            </div>
           </div>
-          
+          <div className="bg-red-500/10 text-red-600 px-3 py-1 rounded-full text-xs font-medium flex items-center">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            </svg>
+            Importante
+          </div>
+        </div>
 
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Términos principales */}
+          <div className="space-y-3">
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-primary text-sm mb-1">Fines Educativos</h4>
+                  <p className="text-xs text-gray-600">Esta aplicación es solo para fines educativos y de demostración</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-primary text-sm mb-1">No Diagnóstico Médico</h4>
+                  <p className="text-xs text-gray-600">No debe utilizarse como único criterio para decisiones médicas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-primary text-sm mb-1">Limitación de Responsabilidad</h4>
+                  <p className="text-xs text-gray-600">Los desarrolladores no se hacen responsables por decisiones médicas basadas en esta aplicación</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="flex items-start">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold text-primary text-sm mb-1">Aceptación de Términos</h4>
+                  <p className="text-xs text-gray-600">El uso de esta aplicación implica la aceptación de estos términos</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Disclaimer médico destacado */}
+        <div className="mt-6 bg-gradient-to-r from-red-500/5 to-orange-500/5 border border-red-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <div className="bg-red-500 p-2 rounded-full mr-3 mt-1">
+              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h4 className="font-bold text-red-700 text-sm mb-2">⚠️ IMPORTANTE - Disclaimer Médico</h4>
+              <p className="text-sm text-primary leading-relaxed">
+                Esta aplicación es únicamente una herramienta de apoyo y <strong>NO reemplaza el diagnóstico médico profesional</strong>. 
+                Siempre consulta con un dermatólogo o especialista para evaluación y diagnóstico definitivo.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

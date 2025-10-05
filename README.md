@@ -1,4 +1,4 @@
-# 🩺 OncoDerma - Análisis de Piel con IA
+# 🩺 OncoDerma - Plataforma de Análisis de Piel con IA
 
 [![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue)](https://github.com/MattFrs12343/SkinCancer/actions)
 [![React](https://img.shields.io/badge/Frontend-React%2018-61dafb)](https://reactjs.org/)
@@ -6,9 +6,43 @@
 [![Python](https://img.shields.io/badge/Python-3.11-3776ab)](https://python.org/)
 [![License](https://img.shields.io/badge/License-Educational-green)](LICENSE)
 
-OncoDerma es una aplicación web avanzada que utiliza inteligencia artificial para analizar imágenes de la piel y proporcionar estimaciones de probabilidad de cáncer. Diseñada como herramienta de apoyo médico, combina tecnología moderna con una interfaz intuitiva para facilitar la detección temprana.
+## 📋 Tabla de Contenidos
 
-> ⚠️ **Importante**: Esta aplicación es únicamente una herramienta de apoyo y NO reemplaza el diagnóstico médico profesional.
+- [Descripción General](#descripción-general)
+- [Arquitectura](#arquitectura)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Instalación y Configuración](#instalación-y-configuración)
+- [Flujo de Desarrollo](#flujo-de-desarrollo)
+- [Documentación de la API](#documentación-de-la-api)
+- [Sistema de Autenticación](#sistema-de-autenticación)
+- [Componentes Frontend](#componentes-frontend)
+- [Servicios Backend](#servicios-backend)
+- [Pipeline CI/CD](#pipeline-cicd)
+- [Pruebas](#pruebas)
+- [Despliegue](#despliegue)
+- [Contribución](#contribución)
+- [Licencia](#licencia)
+
+## 📖 Descripción General
+
+OncoDerma es una aplicación web moderna que aprovecha la inteligencia artificial para analizar imágenes de piel y proporcionar estimaciones de probabilidad para la detección de cáncer de piel. Construida con una arquitectura de microservicios, combina un frontend basado en React con un backend FastAPI para ofrecer una experiencia de usuario fluida.
+
+### 🎯 Características Clave
+
+- **Análisis con IA**: Modelo de aprendizaje automático simulado para análisis de imágenes de piel
+- **Procesamiento en Tiempo Real**: Análisis de imágenes con seguimiento de progreso y retroalimentación en vivo
+- **Diseño Responsivo**: Enfoque móvil primero con compatibilidad entre dispositivos
+- **Autenticación Segura**: Sistema multiusuario con acceso basado en roles
+- **Capacidad Offline**: Funcionalidad de respaldo cuando el backend no está disponible
+- **UI/UX Moderna**: Interfaz limpia y profesional con cumplimiento de accesibilidad
+
+### 🏥 Casos de Uso
+
+- **Profesionales Médicos**: Herramienta de detección para dermatólogos y proveedores de atención médica
+- **Educativo**: Plataforma de entrenamiento y demostración para estudiantes de medicina
+- **Investigación**: Recopilación y análisis de datos para investigación de cáncer de piel
+- **Salud Pública**: Programas de detección comunitaria y concientización
 
 ## ✨ Características Principales
 
@@ -22,9 +56,11 @@ OncoDerma es una aplicación web avanzada que utiliza inteligencia artificial pa
 ### 🎨 **Interfaz Moderna y Responsiva**
 
 - Diseño minimalista y profesional
+- **Modo Oscuro/Claro** - Cambio automático según preferencias del sistema
 - Totalmente responsiva (móvil, tablet, desktop)
 - Navegación intuitiva con React Router
 - Componentes reutilizables con Tailwind CSS
+- Transiciones suaves entre temas
 
 ### 🔒 **Seguridad y Privacidad**
 
@@ -55,8 +91,9 @@ OncoDerma es una aplicación web avanzada que utiliza inteligencia artificial pa
 - **Vite 4.5** - Herramienta de build ultrarrápida
 - **Tailwind CSS 3.3** - Framework de estilos utility-first
 - **React Router DOM 6.20** - Navegación SPA avanzada
-- **Custom Hooks** - Lógica reutilizable (useAuth, useImageAnalysis)
+- **Custom Hooks** - Lógica reutilizable (useAuth, useImageAnalysis, useTheme)
 - **Context API** - Gestión de estado global
+- **Modo Oscuro** - Sistema completo de temas con persistencia
 
 ### ⚙️ **Backend**
 
@@ -260,14 +297,14 @@ docker-compose up -d
 
 Para acceder a la aplicación, usa cualquiera de estos usuarios con la **contraseña estática: `1234`**
 
-| Usuario    | Nombre Completo    | Rol           | Email                    |
-| ---------- | ------------------ | ------------- | ------------------------ |
-| `Matias`   | Matias Franco      | Administrador | matias@oncoderma.com     |
-| `Bianca`   | Bianca Sánchez     | Doctora       | bianca@oncoderma.com     |
-| `Melissa`  | Melissa Duran      | Especialista  | melissa@oncoderma.com    |
-| `Carlos`   | Carlos Berrios     | Médico        | carlos@oncoderma.com     |
-| `Invitado` | Usuario Invitado   | Invitado      | invitado@oncoderma.com   |
-| `admin`    | Administrador      | Admin         | admin@oncoderma.com      |
+| Usuario    | Nombre Completo  | Rol           | Email                  |
+| ---------- | ---------------- | ------------- | ---------------------- |
+| `Matias`   | Matias Franco    | Administrador | matias@oncoderma.com   |
+| `Bianca`   | Bianca Sánchez   | Doctora       | bianca@oncoderma.com   |
+| `Melissa`  | Melissa Duran    | Especialista  | melissa@oncoderma.com  |
+| `Carlos`   | Carlos Berrios   | Médico        | carlos@oncoderma.com   |
+| `Invitado` | Usuario Invitado | Invitado      | invitado@oncoderma.com |
+| `admin`    | Administrador    | Admin         | admin@oncoderma.com    |
 
 > 🔑 **Contraseña única**: Todos los usuarios usan la contraseña `1234`
 
@@ -289,21 +326,41 @@ Si el backend no está disponible, la aplicación funciona en **modo local**:
 
 > ⚠️ **Nota**: Estas son credenciales de demostración únicamente. En producción, implementar autenticación robusta.
 
-## 🎨 Paleta de Colores
+## 🎨 Sistema de Temas y Colores
 
-- **Primary**: `#0F172A` - Azul muy oscuro
+### 🌞 **Tema Claro (Por defecto)**
+
+- **Primary**: `#0F172A` - Azul muy oscuro para texto
 - **Secondary**: `#1E3A8A` - Azul médico clásico
 - **Accent**: `#06B6D4` - Cian claro para acentos
 - **Background**: `#E2E8F0` - Gris muy claro de fondo
 - **White**: `#FFFFFF` - Blanco puro
+
+### 🌙 **Tema Oscuro**
+
+- **Primary**: `#E2E8F0` - Texto claro principal
+- **Secondary**: `#93C5FD` - Azul claro para subtítulos/destacar
+- **Accent**: `#06B6D4` - Mantiene el cian para acentos
+- **Background**: `#0F172A` - Fondo principal muy oscuro
+- **White**: `#1E293B` - Gris azulado oscuro para componentes
+
+### ⚙️ **Funcionalidades del Sistema de Temas**
+
+- **Detección automática** de preferencias del sistema
+- **Persistencia** en localStorage
+- **Toggle manual** en la interfaz
+- **Transiciones suaves** entre temas
+- **Meta theme-color** dinámico para móviles
+- **Variables CSS** para máxima flexibilidad
 
 ## 📱 Guía de Uso Completa
 
 ### 🔑 **1. Acceso a la Aplicación**
 
 1. Abre `http://localhost:3000` en tu navegador
-2. Ingresa credenciales de prueba (ver sección anterior)
-3. El sistema validará automáticamente (backend o local)
+2. **Cambiar tema**: Usa el toggle en la esquina superior derecha (login) o en la barra de navegación
+3. Ingresa credenciales de prueba (ver sección anterior)
+4. El sistema validará automáticamente (backend o local)
 
 ### 🧭 **2. Navegación Principal**
 
@@ -626,3 +683,234 @@ Agradecimientos a las tecnologías y librerías que hacen posible este proyecto:
 **⭐ Si este proyecto te resulta útil, considera darle una estrella en GitHub**
 
 </div>
+
+## 🏗️ Arquitectura
+
+### 🎯 Arquitectura del Sistema
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   AI Model      │
+│   (React SPA)   │◄──►│   (FastAPI)     │◄──►│   (Simulated)   │
+│                 │    │                 │    │                 │
+│ • React 18      │    │ • FastAPI       │    │ • NumPy         │
+│ • Vite          │    │ • Uvicorn       │    │ • PIL/Pillow    │
+│ • Tailwind CSS  │    │ • Pydantic      │    │ • Custom Logic  │
+│ • React Router  │    │ • Aiofiles      │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Static Files  │    │   File Storage  │    │   Temp Storage  │
+│   (Public)      │    │   (Temporary)   │    │   (Processing)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### 🔄 Arquitectura de Flujo de Datos
+
+```mermaid
+graph TD
+    A[User Interface] --> B[Authentication Layer]
+    B --> C[File Upload Handler]
+    C --> D[File Validation]
+    D --> E[AI Processing Engine]
+    E --> F[Results Generator]
+    F --> G[Response Handler]
+    G --> A
+
+    H[Offline Mode] --> I[Local Validation]
+    I --> J[Simulated Analysis]
+    J --> F
+
+    K[Error Handler] --> L[Fallback Systems]
+    L --> H
+```
+
+### 🛡️ Arquitectura de Seguridad
+
+```
+Internet → CORS → Rate Limiting → Authentication → File Validation → Processing → Response
+    ↓         ↓         ↓              ↓               ↓              ↓           ↓
+  HTTPS    Origins   IP-based      JWT/Local      MIME/Size      Temp Files   Sanitized
+```
+
+## 🛠️ Stack Tecnológico
+
+### 🎨 Stack Frontend
+
+| Tecnología       | Versión | Propósito            | Configuración                        |
+| ---------------- | ------- | -------------------- | ------------------------------------ |
+| **React**        | 18.2.0  | Framework UI         | JSX, Hooks, Context API              |
+| **Vite**         | 4.5.0   | Herramienta de Build | HMR, ES Modules, Optimización        |
+| **Tailwind CSS** | 3.3.5   | Estilos              | Utility-first, Responsivo            |
+| **React Router** | 6.20.1  | Navegación           | SPA Routing, Rutas Protegidas        |
+| **ESLint**       | 8.53.0  | Calidad de Código    | Plugins React, Reglas personalizadas |
+
+### ⚙️ Stack Backend
+
+| Tecnología   | Versión | Propósito                 | Configuración                      |
+| ------------ | ------- | ------------------------- | ---------------------------------- |
+| **FastAPI**  | Última  | Framework Web             | Async, Auto-docs, Validación       |
+| **Python**   | 3.11+   | Runtime                   | Type hints, Sintaxis moderna       |
+| **Uvicorn**  | Última  | Servidor ASGI             | Auto-reload, Multi-worker          |
+| **Pydantic** | 2.5.0   | Validación de Datos       | Type safety, Serialización         |
+| **Pillow**   | 10.1.0  | Procesamiento de Imágenes | Soporte de formatos, Validación    |
+| **NumPy**    | 1.24.3  | Computación Numérica      | Operaciones de arrays, Matemáticas |
+
+### 🔧 Herramientas de Desarrollo
+
+| Herramienta        | Propósito          | Configuración                    |
+| ------------------ | ------------------ | -------------------------------- |
+| **GitHub Actions** | Pipeline CI/CD     | Auto-deploy, Testing, Linting    |
+| **Docker**         | Containerización   | Builds multi-etapa, Optimización |
+| **ESLint**         | Linting JavaScript | Reglas React, Mejores prácticas  |
+| **Prettier**       | Formateo de Código | Estilo consistente, Auto-formato |
+
+## 📁 Detailed Project Structure
+
+```
+oncoderma/
+├── 📁 .github/                           # GitHub Actions & Workflows
+│   └── workflows/
+│       ├── ci-cd.yml                    # Main CI/CD pipeline
+│       ├── commit-trigger.yml           # Commit notifications
+│       └── auto-deploy.yml              # Automated deployment
+│
+├── 📁 frontend/                         # React Application
+│   ├── 📁 public/                       # Static Assets
+│   │   ├── img/                         # Images & Icons
+│   │   │   ├── OncoDerma-Logo.png      # Main logo
+│   │   │   ├── medical-analysis.svg     # Medical illustration
+│   │   │   ├── ai-technology.svg        # AI technology illustration
+│   │   │   ├── security-privacy.svg     # Security illustration
+│   │   │   ├── avatar-maria-gonzalez.svg # User testimonial avatar
+│   │   │   └── avatar-dr-carlos-ruiz.svg # Doctor testimonial avatar
+│   │   ├── vite.svg                     # Vite favicon
+│   │   └── favicon.ico                  # Custom favicon
+│   │
+│   ├── 📁 src/                          # Source Code
+│   │   ├── 📁 components/               # React Components
+│   │   │   ├── 📁 auth/                 # Authentication Components
+│   │   │   │   ├── Login.jsx            # Login form with validation
+│   │   │   │   └── ProtectedRoute.jsx   # Route protection HOC
+│   │   │   ├── 📁 common/               # Shared Components
+│   │   │   │   ├── ContactInfo.jsx      # Contact information display
+│   │   │   │   ├── ConnectionStatus.jsx # Real-time connection status
+│   │   │   │   ├── SystemInfo.jsx       # System information display
+│   │   │   │   ├── PerformanceMetrics.jsx # Performance monitoring
+│   │   │   │   └── ResourcePreloader.jsx # Asset preloading
+│   │   │   ├── 📁 layout/               # Layout Components
+│   │   │   │   ├── Layout.jsx           # Main layout wrapper
+│   │   │   │   └── NavBar.jsx           # Navigation bar with responsive menu
+│   │   │   └── 📁 ui/                   # UI Components
+│   │   │       ├── FileUpload.jsx       # Drag & drop file upload
+│   │   │       ├── LoadingSpinner.jsx   # Loading indicators
+│   │   │       └── ProgressBar.jsx      # Progress visualization
+│   │   │
+│   │   ├── 📁 pages/                    # Page Components
+│   │   │   ├── Home.jsx                 # Landing page with features
+│   │   │   ├── Analizar.jsx             # Image analysis interface
+│   │   │   ├── FAQ.jsx                  # Frequently asked questions
+│   │   │   └── Contacto.jsx             # Contact information
+│   │   │
+│   │   ├── 📁 services/                 # API Services
+│   │   │   ├── authService.js           # Authentication API calls
+│   │   │   └── analysisService.js       # Image analysis API calls
+│   │   │
+│   │   ├── 📁 hooks/                    # Custom React Hooks
+│   │   │   ├── useAuth.jsx              # Authentication state management
+│   │   │   └── useImageAnalysis.js      # Image analysis state management
+│   │   │
+│   │   ├── 📁 utils/                    # Utility Functions
+│   │   │   ├── constants.js             # Application constants
+│   │   │   └── validators.js            # Form validation functions
+│   │   │
+│   │   ├── App.jsx                      # Root component with routing
+│   │   ├── main.jsx                     # Application entry point
+│   │   └── index.css                    # Global styles
+│   │
+│   ├── package.json                     # Frontend dependencies
+│   ├── vite.config.js                   # Vite configuration
+│   ├── tailwind.config.js               # Tailwind CSS configuration
+│   ├── postcss.config.js                # PostCSS configuration
+│   └── eslint.config.js                 # ESLint configuration
+│
+├── 📁 backend/                          # FastAPI Application
+│   ├── 📁 app/                          # Application Package
+│   │   ├── 📁 api/                      # API Layer
+│   │   │   └── routes/                  # API Route Handlers
+│   │   │       ├── auth.py              # Authentication endpoints
+│   │   │       └── analysis.py          # Image analysis endpoints
+│   │   │
+│   │   ├── 📁 core/                     # Core Configuration
+│   │   │   ├── config.py                # Application settings
+│   │   │   └── security.py              # Security middleware & utilities
+│   │   │
+│   │   ├── 📁 models/                   # AI Models
+│   │   │   └── ai_model.py              # Simulated AI model implementation
+│   │   │
+│   │   ├── 📁 schemas/                  # Pydantic Models
+│   │   │   ├── auth.py                  # Authentication data models
+│   │   │   └── analysis.py              # Analysis data models
+│   │   │
+│   │   └── main.py                      # FastAPI application factory
+│   │
+│   ├── requirements.txt                 # Python dependencies
+│   └── temp_uploads/                    # Temporary file storage (auto-created)
+│
+├── 📁 img/                              # Project Assets
+│   └── OncoDerma-Logo.png               # Original logo file
+│
+├── 📁 scripts/                          # Utility Scripts
+├── 📄 README.md                         # Project documentation
+├── 📄 .env.example                      # Environment variables template
+├── 📄 .gitignore                        # Git ignore rules
+├── 📄 docker-compose.yml                # Docker configuration
+├── 📄 netlify.toml                      # Netlify deployment config
+├── 📄 vercel.json                       # Vercel deployment config
+└── 📄 render.yaml                       # Render deployment config
+```
+
+## 🚀 Quick Start Commands
+
+### 🎯 Development Environment Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/MattFrs12343/SkinCancer.git
+cd SkinCancer
+
+# Frontend setup (Terminal 1)
+cd frontend
+npm install
+npm run dev
+
+# Backend setup (Terminal 2)
+cd backend
+pip install -r requirements.txt
+py -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 🌐 Application URLs
+
+| Service               | URL                          | Description            |
+| --------------------- | ---------------------------- | ---------------------- |
+| **Frontend**          | http://localhost:3000        | React application      |
+| **Backend API**       | http://localhost:8000        | FastAPI server         |
+| **API Documentation** | http://localhost:8000/docs   | Interactive Swagger UI |
+| **Alternative Docs**  | http://localhost:8000/redoc  | ReDoc documentation    |
+| **Health Check**      | http://localhost:8000/health | API health status      |
+
+### 👥 Test User Credentials
+
+| Username   | Full Name      | Role          | Password |
+| ---------- | -------------- | ------------- | -------- |
+| `Matias`   | Matias Franco  | Administrator | `1234`   |
+| `Bianca`   | Bianca Sánchez | Doctor        | `1234`   |
+| `Melissa`  | Melissa Duran  | Specialist    | `1234`   |
+| `Carlos`   | Carlos Berrios | Doctor        | `1234`   |
+| `Invitado` | Guest User     | Guest         | `1234`   |
+| `admin`    | Administrator  | Admin         | `1234`   |
+
+> 🔑 **Static Password**: All users share the password `1234` for demo purposes

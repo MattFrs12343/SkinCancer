@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth.jsx'
 import { validateRequired } from '../../utils/validators'
+import ThemeToggle from '../ui/ThemeToggle'
+import AdaptiveLogo from '../ui/AdaptiveLogo'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -92,25 +94,23 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 relative">
+      {/* Toggle de tema en la esquina superior derecha */}
+      <div className="absolute top-6 right-6">
+        <ThemeToggle />
+      </div>
+      
       <div className="card max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
-          <img 
-            src="/img/OncoDerma-Logo.png" 
-            alt="OncoDerma Logo" 
-            className="w-96 h-auto mx-auto mb-6"
-            onError={(e) => {
-              e.target.style.display = 'none'
-            }}
-          />
+          <AdaptiveLogo className="w-96 h-auto mx-auto mb-6" alt="OncoDerma Logo" />
         </div>
 
         {/* Formulario de login */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Campo Usuario */}
           <div>
-            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-3">
+            <label htmlFor="username" className="block text-sm font-semibold text-primary mb-3">
               Usuario
             </label>
             <input
@@ -119,16 +119,16 @@ const Login = () => {
               name="username"
               value={formData.username}
               onChange={handleInputChange}
-              className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-100 ${
+              className={`input-field ${
                 errors.username 
-                  ? 'border-red-400 focus:border-red-500' 
-                  : 'border-gray-200 focus:border-blue-400 hover:border-gray-300'
+                  ? 'border-red-600 focus:border-red-600 focus:ring-red-600/20' 
+                  : ''
               }`}
               placeholder="Ingresa tu usuario"
               disabled={loading}
             />
             {errors.username && (
-              <p className="mt-2 text-sm text-red-500 flex items-center">
+              <p className="mt-2 text-sm text-red-600 flex items-center">
                 <span className="mr-1">⚠️</span>
                 {errors.username}
               </p>
@@ -137,7 +137,7 @@ const Login = () => {
 
           {/* Campo Contraseña */}
           <div>
-            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-3">
+            <label htmlFor="password" className="block text-sm font-semibold text-primary mb-3">
               Contraseña
             </label>
             <input
@@ -146,16 +146,16 @@ const Login = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-100 ${
+              className={`input-field ${
                 errors.password 
-                  ? 'border-red-400 focus:border-red-500' 
-                  : 'border-gray-200 focus:border-blue-400 hover:border-gray-300'
+                  ? 'border-red-600 focus:border-red-600 focus:ring-red-600/20' 
+                  : ''
               }`}
               placeholder="Ingresa tu contraseña"
               disabled={loading}
             />
             {errors.password && (
-              <p className="mt-2 text-sm text-red-500 flex items-center">
+              <p className="mt-2 text-sm text-red-600 flex items-center">
                 <span className="mr-1">⚠️</span>
                 {errors.password}
               </p>
@@ -164,7 +164,7 @@ const Login = () => {
 
           {/* Error general */}
           {generalError && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="bg-red-600/10 border border-red-600/30 rounded-lg p-3">
               <p className="text-sm text-red-600">{generalError}</p>
             </div>
           )}
@@ -190,7 +190,7 @@ const Login = () => {
 
         {/* Disclaimer */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-600">
             Esta aplicación es una herramienta de apoyo y no reemplaza el diagnóstico médico profesional.
           </p>
         </div>

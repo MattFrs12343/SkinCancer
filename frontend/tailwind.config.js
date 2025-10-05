@@ -4,14 +4,20 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        primary: '#0F172A',      // Azul muy oscuro
-        secondary: '#1E3A8A',    // Azul médico
-        accent: '#06B6D4',       // Cian claro
-        background: '#E2E8F0',   // Gris claro
-        white: '#FFFFFF',        // Blanco puro
+        // Colores usando variables CSS para soporte de temas
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)', 
+        accent: 'var(--accent)',
+        background: 'var(--background)',
+        white: 'var(--white)',
+        'gray-50': 'var(--gray-50)',
+        'gray-600': 'var(--gray-600)',
+        'red-600': 'var(--red-600)',
+        'green-600': 'var(--green-600)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
