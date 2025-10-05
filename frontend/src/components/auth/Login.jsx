@@ -94,29 +94,23 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="card max-w-md w-full">
-        {/* Logo y título */}
+        {/* Logo */}
         <div className="text-center mb-8">
           <img 
             src="/img/OncoDerma-Logo.png" 
             alt="OncoDerma Logo" 
-            className="h-16 mx-auto mb-4"
+            className="w-96 h-auto mx-auto mb-6"
             onError={(e) => {
               e.target.style.display = 'none'
             }}
           />
-          <h1 className="text-2xl font-semibold text-primary mb-2">
-            Bienvenido a OncoDerma
-          </h1>
-          <p className="text-gray-600 text-sm">
-            Análisis de piel con inteligencia artificial
-          </p>
         </div>
 
         {/* Formulario de login */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Campo Usuario */}
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-primary mb-2">
+            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-3">
               Usuario
             </label>
             <input
@@ -125,18 +119,25 @@ const Login = () => {
               name="username"
               value={formData.username}
               onChange={handleInputChange}
-              className={`input-field ${errors.username ? 'border-red-500 focus:ring-red-500' : ''}`}
+              className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-100 ${
+                errors.username 
+                  ? 'border-red-400 focus:border-red-500' 
+                  : 'border-gray-200 focus:border-blue-400 hover:border-gray-300'
+              }`}
               placeholder="Ingresa tu usuario"
               disabled={loading}
             />
             {errors.username && (
-              <p className="mt-1 text-sm text-red-600">{errors.username}</p>
+              <p className="mt-2 text-sm text-red-500 flex items-center">
+                <span className="mr-1">⚠️</span>
+                {errors.username}
+              </p>
             )}
           </div>
 
           {/* Campo Contraseña */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-primary mb-2">
+            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-3">
               Contraseña
             </label>
             <input
@@ -145,12 +146,19 @@ const Login = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className={`input-field ${errors.password ? 'border-red-500 focus:ring-red-500' : ''}`}
+              className={`w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-100 ${
+                errors.password 
+                  ? 'border-red-400 focus:border-red-500' 
+                  : 'border-gray-200 focus:border-blue-400 hover:border-gray-300'
+              }`}
               placeholder="Ingresa tu contraseña"
               disabled={loading}
             />
             {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+              <p className="mt-2 text-sm text-red-500 flex items-center">
+                <span className="mr-1">⚠️</span>
+                {errors.password}
+              </p>
             )}
           </div>
 
@@ -178,14 +186,7 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Credenciales de prueba */}
-        <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm text-blue-800 font-medium mb-2">Credenciales de prueba:</p>
-          <p className="text-sm text-blue-700">
-            <strong>Usuario:</strong> admin<br />
-            <strong>Contraseña:</strong> 1234
-          </p>
-        </div>
+
 
         {/* Disclaimer */}
         <div className="mt-6 text-center">

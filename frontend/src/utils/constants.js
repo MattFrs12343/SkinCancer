@@ -28,21 +28,27 @@ export const APP_CONFIG = {
       },
       {
         username: 'Bianca',
-        displayName: 'Bianca García',
+        displayName: 'Bianca Sánchez',
         role: 'Doctora',
         email: 'bianca@oncoderma.com'
       },
       {
         username: 'Melissa',
-        displayName: 'Melissa López',
+        displayName: 'Melissa Duran',
         role: 'Especialista',
         email: 'melissa@oncoderma.com'
       },
       {
         username: 'Carlos',
-        displayName: 'Carlos Rodríguez',
+        displayName: 'Carlos Berrios',
         role: 'Médico',
         email: 'carlos@oncoderma.com'
+      },
+      {
+        username: 'Invitado',
+        displayName: 'Usuario Invitado',
+        role: 'Invitado',
+        email: 'invitado@oncoderma.com'
       }
     ],
     // Credenciales legacy (mantener compatibilidad)

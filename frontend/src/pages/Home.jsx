@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import MedicalDisclaimer from '../components/common/MedicalDisclaimer'
 
 const Home = () => {
   return (
@@ -14,10 +13,7 @@ const Home = () => {
             Análisis de imágenes de piel con inteligencia artificial para apoyo en la detección temprana
           </p>
           
-          {/* Disclaimer prominente en hero */}
-          <div className="mb-8">
-            <MedicalDisclaimer variant="compact" />
-          </div>
+
           
           <Link
             to="/analizar"
@@ -43,27 +39,34 @@ const Home = () => {
               Nuestra tecnología está diseñada para ser una herramienta de apoyo que ayude tanto a pacientes como a 
               profesionales de la salud en la detección temprana de posibles anomalías en la piel.
             </p>
+            <div className="bg-accent/10 p-6 rounded-lg mt-6">
+              <h3 className="text-xl font-semibold text-secondary mb-4">Características principales:</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                  Análisis rápido con IA avanzada
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                  Interfaz fácil de usar
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                  Resultados visuales claros
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
+                  Privacidad garantizada
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="bg-accent/10 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold text-secondary mb-4">Características principales:</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                Análisis rápido con IA avanzada
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                Interfaz fácil de usar
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                Resultados visuales claros
-              </li>
-              <li className="flex items-center">
-                <span className="w-2 h-2 bg-accent rounded-full mr-3"></span>
-                Privacidad garantizada
-              </li>
-            </ul>
+          <div className="flex justify-center">
+            <img 
+              src="/img/medical-analysis.svg" 
+              alt="Análisis médico con IA" 
+              className="w-full max-w-md h-auto"
+            />
           </div>
         </div>
       </section>
@@ -73,10 +76,13 @@ const Home = () => {
         <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
           ¿Cómo funciona?
         </h2>
+        
+
+        
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-white">1</span>
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
+              <span className="text-4xl">📸</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Sube tu imagen</h3>
             <p className="text-gray-600">
@@ -84,8 +90,8 @@ const Home = () => {
             </p>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-white">2</span>
+            <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
+              <span className="text-4xl">🤖</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Análisis con IA</h3>
             <p className="text-gray-600">
@@ -93,8 +99,8 @@ const Home = () => {
             </p>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-white">3</span>
+            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
+              <span className="text-4xl">📊</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Obtén resultados</h3>
             <p className="text-gray-600">
@@ -161,7 +167,7 @@ const Home = () => {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h3 className="text-xl font-semibold text-secondary mb-4">Tu privacidad es nuestra prioridad</h3>
-            <ul className="space-y-3 text-gray-700">
+            <ul className="space-y-3 text-gray-700 mb-6">
               <li className="flex items-center">
                 <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                 Las imágenes se procesan temporalmente y se eliminan inmediatamente
@@ -179,16 +185,23 @@ const Home = () => {
                 Cumplimiento con estándares de seguridad médica
               </li>
             </ul>
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h4 className="font-semibold text-green-800 mb-3">🔒 Proceso seguro:</h4>
+              <ol className="space-y-2 text-green-700 text-sm">
+                <li>1. Imagen se sube de forma cifrada</li>
+                <li>2. Se procesa en servidor seguro</li>
+                <li>3. Se genera el análisis</li>
+                <li>4. Imagen se elimina automáticamente</li>
+                <li>5. Solo recibes el resultado</li>
+              </ol>
+            </div>
           </div>
-          <div className="bg-green-50 p-6 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-3">🔒 Proceso seguro:</h4>
-            <ol className="space-y-2 text-green-700 text-sm">
-              <li>1. Imagen se sube de forma cifrada</li>
-              <li>2. Se procesa en servidor seguro</li>
-              <li>3. Se genera el análisis</li>
-              <li>4. Imagen se elimina automáticamente</li>
-              <li>5. Solo recibes el resultado</li>
-            </ol>
+          <div className="flex justify-center">
+            <img 
+              src="/img/security-privacy.svg" 
+              alt="Seguridad y privacidad de datos" 
+              className="w-full max-w-md h-auto"
+            />
           </div>
         </div>
       </section>
@@ -198,24 +211,34 @@ const Home = () => {
         <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
           Resultados Confiables
         </h2>
-        <div className="text-center mb-8">
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Nuestro modelo de inteligencia artificial ha sido entrenado con miles de imágenes dermatológicas 
-            para proporcionar análisis precisos y confiables.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-secondary mb-2">95%</div>
-            <p className="text-gray-600">Precisión en detección</p>
+        
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
+          <div>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              Nuestro modelo de inteligencia artificial ha sido entrenado con miles de imágenes dermatológicas 
+              para proporcionar análisis precisos y confiables.
+            </p>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-secondary mb-1">95%</div>
+                <p className="text-xs text-gray-600">Precisión</p>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-secondary mb-1">&lt;30s</div>
+                <p className="text-xs text-gray-600">Análisis</p>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-secondary mb-1">24/7</div>
+                <p className="text-xs text-gray-600">Disponible</p>
+              </div>
+            </div>
           </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-secondary mb-2">&lt;30s</div>
-            <p className="text-gray-600">Tiempo de análisis</p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-sm">
-            <div className="text-3xl font-bold text-secondary mb-2">24/7</div>
-            <p className="text-gray-600">Disponibilidad</p>
+          <div className="flex justify-center">
+            <img 
+              src="/img/ai-technology.svg" 
+              alt="Tecnología de IA avanzada" 
+              className="w-full max-w-md h-auto"
+            />
           </div>
         </div>
       </section>
@@ -226,33 +249,47 @@ const Home = () => {
           Testimonios
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <p className="text-gray-700 mb-4 italic">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+            <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">
               "OncoDerma me ayudó a detectar una lesión sospechosa que no había notado. 
               Gracias a la recomendación, consulté con mi dermatólogo a tiempo."
             </p>
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center mr-3">
-                <span className="text-white font-semibold">M</span>
-              </div>
+              <img 
+                src="/img/avatar-maria-gonzalez.svg" 
+                alt="María González" 
+                className="w-14 h-14 rounded-full mr-4 border-2 border-accent/20"
+              />
               <div>
-                <p className="font-semibold text-primary">María González</p>
+                <p className="font-semibold text-primary text-lg">María González</p>
                 <p className="text-sm text-gray-600">Paciente</p>
+                <div className="flex mt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-sm">⭐</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <p className="text-gray-700 mb-4 italic">
+          <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+            <p className="text-gray-700 mb-6 italic text-lg leading-relaxed">
               "Como dermatólogo, encuentro que OncoDerma es una excelente herramienta de apoyo 
               para el screening inicial de mis pacientes."
             </p>
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center mr-3">
-                <span className="text-white font-semibold">D</span>
-              </div>
+              <img 
+                src="/img/avatar-dr-carlos-ruiz.svg" 
+                alt="Dr. Carlos Ruiz" 
+                className="w-14 h-14 rounded-full mr-4 border-2 border-secondary/20"
+              />
               <div>
-                <p className="font-semibold text-primary">Dr. Carlos Ruiz</p>
-                <p className="text-sm text-gray-600">Dermatólogo</p>
+                <p className="font-semibold text-primary text-lg">Dr. Carlos Ruiz</p>
+                <p className="text-sm text-gray-600">Dermatólogo Certificado</p>
+                <div className="flex mt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-sm">⭐</span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -265,12 +302,10 @@ const Home = () => {
           Información Legal y Responsabilidades
         </h2>
         <div className="space-y-6">
-          {/* Disclaimer médico prominente */}
-          <MedicalDisclaimer variant="prominent" />
+
           
           {/* Términos adicionales */}
           <div className="bg-gray-50 p-6 rounded-lg">
-            <h3 className="font-semibold text-primary mb-4">Términos de Uso</h3>
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start">
                 <span className="w-2 h-2 bg-gray-400 rounded-full mr-3 mt-2"></span>
@@ -291,51 +326,11 @@ const Home = () => {
             </ul>
           </div>
           
-          {/* Recomendaciones médicas */}
-          <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-            <h3 className="font-semibold text-blue-800 mb-4">📋 Recomendaciones Médicas</h3>
-            <div className="text-blue-700 space-y-2">
-              <p><strong>Siempre consulte con un dermatólogo si:</strong></p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Nota cambios en lunares o manchas existentes</li>
-                <li>Aparecen nuevas lesiones pigmentadas</li>
-                <li>Tiene antecedentes familiares de cáncer de piel</li>
-                <li>La aplicación sugiere un porcentaje alto de riesgo</li>
-                <li>Tiene dudas sobre cualquier lesión en su piel</li>
-              </ul>
-            </div>
-          </div>
+
         </div>
       </section>
 
-      {/* Contacto */}
-      <section className="card bg-gradient-to-r from-secondary to-primary text-white">
-        <div className="text-center">
-          <h2 className="text-3xl font-semibold mb-6">
-            ¿Tienes preguntas?
-          </h2>
-          <p className="text-lg mb-8 opacity-90">
-            Estamos aquí para ayudarte. Contáctanos a través de WhatsApp para soporte técnico o consultas.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="https://wa.me/8888888"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center space-x-2"
-            >
-              <span>📱</span>
-              <span>WhatsApp: 8888888</span>
-            </a>
-            <Link
-              to="/contacto"
-              className="bg-white/20 hover:bg-white/30 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-            >
-              Más información de contacto
-            </Link>
-          </div>
-        </div>
-      </section>
+
     </div>
   )
 }

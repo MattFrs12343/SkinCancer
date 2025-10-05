@@ -10,6 +10,7 @@ const Login = lazy(() => import('./components/auth/Login'))
 const Layout = lazy(() => import('./components/layout/Layout'))
 const Home = lazy(() => import('./pages/Home'))
 const Analizar = lazy(() => import('./pages/Analizar'))
+const FAQ = lazy(() => import('./pages/FAQ'))
 const Contacto = lazy(() => import('./pages/Contacto'))
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               }>
                 <Route index element={<Home />} />
                 <Route path="analizar" element={<Analizar />} />
+                <Route path="faq" element={<FAQ />} />
                 <Route path="contacto" element={<Contacto />} />
               </Route>
               

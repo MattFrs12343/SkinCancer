@@ -1,5 +1,4 @@
 import ContactInfo from '../components/common/ContactInfo'
-import MedicalDisclaimer from '../components/common/MedicalDisclaimer'
 
 const Contacto = () => {
   const whatsappNumber = '67708839'
@@ -32,32 +31,7 @@ const Contacto = () => {
     }
   ]
 
-  const faqItems = [
-    {
-      question: '¿Qué tipos de imágenes puedo subir?',
-      answer: 'Puedes subir imágenes en formato JPG o PNG, con un tamaño máximo de 10MB. Recomendamos imágenes claras, bien iluminadas y enfocadas en la lesión de piel.'
-    },
-    {
-      question: '¿Qué tan preciso es el análisis?',
-      answer: 'Nuestro modelo de IA tiene una precisión del 95% en condiciones de laboratorio. Sin embargo, este es solo una herramienta de apoyo y NO reemplaza el diagnóstico médico profesional.'
-    },
-    {
-      question: '¿Se almacenan mis imágenes?',
-      answer: 'No. Las imágenes se procesan temporalmente y se eliminan inmediatamente después del análisis. No almacenamos ninguna información personal ni médica.'
-    },
-    {
-      question: '¿Puedo usar esto para diagnosticar cáncer?',
-      answer: 'NO. Esta aplicación es únicamente una herramienta de apoyo. Siempre debes consultar con un dermatólogo o médico especialista para cualquier diagnóstico médico.'
-    },
-    {
-      question: '¿Cuánto tiempo toma el análisis?',
-      answer: 'El análisis típicamente toma entre 2-8 segundos, dependiendo del tamaño y calidad de la imagen.'
-    },
-    {
-      question: '¿Funciona en dispositivos móviles?',
-      answer: 'Sí, la aplicación está optimizada para funcionar en navegadores móviles modernos (iOS Safari, Android Chrome, etc.).'
-    }
-  ]
+
 
   return (
     <div className="py-8 space-y-12">
@@ -138,24 +112,7 @@ const Contacto = () => {
         </div>
       </div>
 
-      {/* Preguntas frecuentes */}
-      <div className="card">
-        <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
-          Preguntas Frecuentes
-        </h2>
-        <div className="space-y-6">
-          {faqItems.map((item, index) => (
-            <div key={index} className="border-b border-gray-200 pb-6 last:border-b-0">
-              <h3 className="text-lg font-semibold text-primary mb-3">
-                ❓ {item.question}
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                {item.answer}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+
 
       {/* Información adicional */}
       <div className="grid md:grid-cols-2 gap-8">
@@ -209,8 +166,7 @@ const Contacto = () => {
         </div>
       </div>
 
-      {/* Disclaimer médico */}
-      <MedicalDisclaimer variant="prominent" />
+
 
       {/* Información de contacto alternativa */}
       <div className="card bg-gray-50">

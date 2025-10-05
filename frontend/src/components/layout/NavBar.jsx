@@ -10,6 +10,7 @@ const NavBar = () => {
   const navigation = [
     { name: 'Home', href: '/', current: location.pathname === '/' },
     { name: 'Analizar', href: '/analizar', current: location.pathname === '/analizar' },
+    { name: 'FAQ', href: '/faq', current: location.pathname === '/faq' },
     { name: 'Contacto', href: '/contacto', current: location.pathname === '/contacto' },
   ]
 

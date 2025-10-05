@@ -260,13 +260,14 @@ docker-compose up -d
 
 Para acceder a la aplicación, usa cualquiera de estos usuarios con la **contraseña estática: `1234`**
 
-| Usuario   | Nombre Completo    | Rol           | Email                    |
-| --------- | ------------------ | ------------- | ------------------------ |
-| `Matias`  | Matias Franco      | Administrador | matias@oncoderma.com     |
-| `Bianca`  | Bianca García      | Doctora       | bianca@oncoderma.com     |
-| `Melissa` | Melissa López      | Especialista  | melissa@oncoderma.com    |
-| `Carlos`  | Carlos Rodríguez   | Médico        | carlos@oncoderma.com     |
-| `admin`   | Administrador      | Admin         | admin@oncoderma.com      |
+| Usuario    | Nombre Completo    | Rol           | Email                    |
+| ---------- | ------------------ | ------------- | ------------------------ |
+| `Matias`   | Matias Franco      | Administrador | matias@oncoderma.com     |
+| `Bianca`   | Bianca Sánchez     | Doctora       | bianca@oncoderma.com     |
+| `Melissa`  | Melissa Duran      | Especialista  | melissa@oncoderma.com    |
+| `Carlos`   | Carlos Berrios     | Médico        | carlos@oncoderma.com     |
+| `Invitado` | Usuario Invitado   | Invitado      | invitado@oncoderma.com   |
+| `admin`    | Administrador      | Admin         | admin@oncoderma.com      |
 
 > 🔑 **Contraseña única**: Todos los usuarios usan la contraseña `1234`
 

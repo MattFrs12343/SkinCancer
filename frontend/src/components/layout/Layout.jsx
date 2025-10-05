@@ -25,7 +25,7 @@ const Layout = () => {
               <img
                 src="/img/OncoDerma-Logo.png"
                 alt="OncoDerma"
-                className="h-6 w-auto"
+                className="h-9 w-auto"
                 onError={(e) => {
                   e.target.style.display = 'none'
                 }}

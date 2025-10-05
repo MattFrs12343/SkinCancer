@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import FileUpload from '../components/ui/FileUpload'
 import CircularProgressBar, { LoadingProgressBar, LinearProgressBar } from '../components/ui/ProgressBar'
-import MedicalDisclaimer from '../components/common/MedicalDisclaimer'
 import ConnectionStatus from '../components/common/ConnectionStatus'
 import { useImageAnalysis } from '../hooks/useImageAnalysis'
 
@@ -82,10 +81,9 @@ const Analizar = () => {
         </p>
       </div>
 
-      {/* Estado de conexión y disclaimer médico */}
-      <div className="max-w-4xl mx-auto space-y-4">
+      {/* Estado de conexión */}
+      <div className="max-w-4xl mx-auto">
         <ConnectionStatus />
-        <MedicalDisclaimer variant="prominent" />
       </div>
 
       {/* Contenido principal */}
@@ -267,8 +265,7 @@ const Analizar = () => {
               })()}
             </div>
 
-            {/* Disclaimer adicional */}
-            <MedicalDisclaimer variant="default" />
+
 
             {/* Acciones */}
             <div className="text-center space-y-4">

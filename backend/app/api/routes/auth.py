@@ -22,21 +22,27 @@ VALID_USERS = [
     },
     {
         "username": "Bianca", 
-        "display_name": "Bianca García",
+        "display_name": "Bianca Sánchez",
         "role": "Doctora",
         "email": "bianca@oncoderma.com"
     },
     {
         "username": "Melissa",
-        "display_name": "Melissa López", 
+        "display_name": "Melissa Duran", 
         "role": "Especialista",
         "email": "melissa@oncoderma.com"
     },
     {
         "username": "Carlos",
-        "display_name": "Carlos Rodríguez",
+        "display_name": "Carlos Berrios",
         "role": "Médico", 
         "email": "carlos@oncoderma.com"
+    },
+    {
+        "username": "Invitado",
+        "display_name": "Usuario Invitado",
+        "role": "Invitado", 
+        "email": "invitado@oncoderma.com"
     }
 ]
 
