@@ -1,4 +1,4 @@
-import { APP_CONFIG, ERROR_CODES, ERROR_MESSAGES } from '../utils/constants'
+import { APP_CONFIG, ERROR_CODES, ERROR_MESSAGES, ANALYSIS_ALGORITHMS, SKIN_LESION_TYPES } from '../utils/constants'
 import { authService } from './authService'
 import cacheService, { withCache } from './cacheService'
 
@@ -192,30 +192,45 @@ class AnalysisService {
       const processingTime = Math.random() * 3 + 2 // 2-5 segundos
       
       setTimeout(() => {
-        // Generar resultado simulado con distribución realista
-        const riskCategories = [
-          { min: 5, max: 25, weight: 70 },   // Bajo riesgo (70%)
-          { min: 25, max: 55, weight: 20 },  // Riesgo moderado (20%)
-          { min: 55, max: 85, weight: 10 }   // Alto riesgo (10%)
-        ]
-        
-        const random = Math.random() * 100
-        let cumulative = 0
-        let selectedCategory = riskCategories[0]
-        
-        for (const category of riskCategories) {
-          cumulative += category.weight
-          if (random <= cumulative) {
-            selectedCategory = category
-            break
+        // Algoritmo inteligente avanzado para generar probabilidades realistas
+        const generateIntelligentAnalysis = () => {
+          // Simular características de la imagen
+          const imageFeatures = this.simulateImageFeatures(file)
+          
+          // Seleccionar patrón de distribución base
+          const ageGroup = this.getRandomAgeGroup()
+          let baseProbabilities = { ...ANALYSIS_ALGORITHMS.DISTRIBUTION_PATTERNS.age_based[ageGroup] }
+          
+          // Aplicar modificadores según características de imagen
+          baseProbabilities = this.applyImageFeatureModifiers(baseProbabilities, imageFeatures)
+          
+          // Aplicar factores de riesgo
+          baseProbabilities = this.applyRiskFactors(baseProbabilities, imageFeatures)
+          
+          // Convertir a porcentajes y normalizar
+          const probabilities = this.normalizeProbabilities(baseProbabilities)
+          
+          // Calcular confianza del análisis
+          const confidence = this.calculateConfidence(imageFeatures)
+          
+          return {
+            probabilities,
+            confidence,
+            imageFeatures,
+            ageGroup
           }
         }
         
-        const probability = Math.round(
-          Math.random() * (selectedCategory.max - selectedCategory.min) + selectedCategory.min
+        const analysisResult = generateIntelligentAnalysis()
+        const lesionProbabilities = analysisResult.probabilities
+        
+        // Determinar el tipo más probable
+        const mostLikelyType = Object.keys(lesionProbabilities).reduce((a, b) => 
+          lesionProbabilities[a] > lesionProbabilities[b] ? a : b
         )
         
-        const confidence = Math.random() * 0.2 + 0.75 // 0.75-0.95
+        const highestProbability = lesionProbabilities[mostLikelyType]
+        const confidence = analysisResult.confidence
         
         // Simular metadatos de imagen
         const imageMetadata = {
@@ -230,7 +245,24 @@ class AnalysisService {
         }
         
         const result = {
-          probability,
+          // Mantener compatibilidad con el formato anterior
+          probability: highestProbability,
+          most_likely_type: mostLikelyType,
+          
+          // Nuevos datos detallados
+          detailed_analysis: {
+            lesion_probabilities: lesionProbabilities,
+            most_likely: {
+              type: mostLikelyType,
+              probability: highestProbability
+            },
+            risk_assessment: {
+              overall_risk: highestProbability > 60 ? 'high' : highestProbability > 30 ? 'medium' : 'low',
+              cancer_probability: lesionProbabilities.mel + lesionProbabilities.bcc + (lesionProbabilities.akiec * 0.3),
+              benign_probability: lesionProbabilities.nv + lesionProbabilities.bkl + lesionProbabilities.vasc + lesionProbabilities.df
+            }
+          },
+          
           processing_time: Math.round(processingTime * 100) / 100,
           confidence: Math.round(confidence * 100) / 100,
           timestamp: new Date().toISOString(),
@@ -366,6 +398,121 @@ class AnalysisService {
     () => 'connectivity_check',
     10000 // 10 segundos de caché
   )
+
+  // Métodos auxiliares para análisis inteligente
+  simulateImageFeatures(file) {
+    // Simular características basadas en el archivo
+    const features = {
+      quality: Math.random() > 0.3 ? 'high' : Math.random() > 0.6 ? 'medium' : 'low',
+      size: file.size > 2 * 1024 * 1024 ? 'large' : file.size > 500 * 1024 ? 'medium' : 'small',
+      clarity: Math.random() > 0.2 ? 'clear' : 'ambiguous',
+      
+      // Características dermatológicas simuladas
+      asymmetry: Math.random() > 0.7,
+      border_irregularity: Math.random() > 0.6,
+      color_variation: Math.random() > 0.5,
+      diameter_large: Math.random() > 0.8,
+      evolution: Math.random() > 0.9,
+      
+      // Características adicionales
+      surface_texture: Math.random() > 0.5 ? 'smooth' : 'rough',
+      pigmentation: Math.random() > 0.3 ? 'uniform' : 'varied',
+      vascularization: Math.random() > 0.8
+    }
+    
+    return features
+  }
+
+  getRandomAgeGroup() {
+    const random = Math.random()
+    if (random < 0.3) return 'young'
+    if (random < 0.7) return 'adult'
+    return 'elderly'
+  }
+
+  applyImageFeatureModifiers(probabilities, features) {
+    const modified = { ...probabilities }
+    
+    // Aplicar modificadores según características
+    if (features.border_irregularity) {
+      const pattern = ANALYSIS_ALGORITHMS.DISTRIBUTION_PATTERNS.image_features.irregular_borders
+      Object.keys(pattern).forEach(key => {
+        modified[key] = (modified[key] + pattern[key]) / 2
+      })
+    }
+    
+    if (features.color_variation) {
+      const pattern = ANALYSIS_ALGORITHMS.DISTRIBUTION_PATTERNS.image_features.varied_color
+      Object.keys(pattern).forEach(key => {
+        modified[key] = (modified[key] + pattern[key]) / 2
+      })
+    }
+    
+    return modified
+  }
+
+  applyRiskFactors(probabilities, features) {
+    const modified = { ...probabilities }
+    
+    // Aplicar factores de riesgo
+    Object.keys(ANALYSIS_ALGORITHMS.RISK_FACTORS).forEach(factor => {
+      if (features[factor.replace('_', '_')]) {
+        const riskFactors = ANALYSIS_ALGORITHMS.RISK_FACTORS[factor]
+        Object.keys(riskFactors).forEach(lesionType => {
+          if (modified[lesionType]) {
+            modified[lesionType] *= riskFactors[lesionType]
+          }
+        })
+      }
+    })
+    
+    return modified
+  }
+
+  normalizeProbabilities(probabilities) {
+    // Convertir a porcentajes
+    const total = Object.values(probabilities).reduce((sum, val) => sum + val, 0)
+    const normalized = {}
+    
+    Object.keys(probabilities).forEach(key => {
+      normalized[key] = Math.round((probabilities[key] / total) * 100)
+    })
+    
+    // Ajuste final para que sume exactamente 100%
+    const finalTotal = Object.values(normalized).reduce((sum, val) => sum + val, 0)
+    if (finalTotal !== 100) {
+      const diff = 100 - finalTotal
+      const maxKey = Object.keys(normalized).reduce((a, b) => 
+        normalized[a] > normalized[b] ? a : b
+      )
+      normalized[maxKey] += diff
+    }
+    
+    return normalized
+  }
+
+  calculateConfidence(features) {
+    let confidence = 0.8 // Base confidence
+    
+    // Ajustar según calidad de imagen
+    if (features.quality === 'high') confidence += 0.1
+    if (features.quality === 'low') confidence -= 0.15
+    
+    // Ajustar según claridad
+    if (features.clarity === 'clear') confidence += 0.05
+    if (features.clarity === 'ambiguous') confidence -= 0.1
+    
+    // Ajustar según características definidas
+    const definedFeatures = [
+      features.asymmetry,
+      features.border_irregularity,
+      features.color_variation
+    ].filter(Boolean).length
+    
+    confidence += definedFeatures * 0.03
+    
+    return Math.max(0.6, Math.min(0.95, confidence))
+  }
 
   // Limpiar caché manualmente
   clearCache() {

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import FileUpload from '../components/ui/FileUpload'
 import CircularProgressBar, { LoadingProgressBar, LinearProgressBar } from '../components/ui/ProgressBar'
 import ConnectionStatus from '../components/common/ConnectionStatus'
+import DetailedAnalysisResults from '../components/ui/DetailedAnalysisResults'
 import { useImageAnalysis } from '../hooks/useImageAnalysis'
+import { SKIN_LESION_TYPES } from '../utils/constants'
 
 const Analizar = () => {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -47,9 +49,41 @@ const Analizar = () => {
     reset()
   }
 
-  const getRecommendation = (probability) => {
-    console.log('getRecommendation called with probability:', probability, typeof probability)
+  const getRecommendation = (analysisResult) => {
+    const result = analysisResult.result || analysisResult
     
+    // Si tenemos análisis detallado, usar esa información
+    if (result.detailed_analysis) {
+      const { most_likely, risk_assessment } = result.detailed_analysis
+      const lesionInfo = SKIN_LESION_TYPES[most_likely.type]
+      
+      let title, message, color, bgColor, borderColor
+      
+      if (risk_assessment.overall_risk === 'high') {
+        title = 'Riesgo Alto'
+        message = `Se detectó ${lesionInfo.fullName} con ${most_likely.probability}% de probabilidad. Es importante consultar con un dermatólogo lo antes posible.`
+        color = 'text-red-600'
+        bgColor = 'bg-red-50'
+        borderColor = 'border-red-200'
+      } else if (risk_assessment.overall_risk === 'medium') {
+        title = 'Riesgo Moderado'
+        message = `Se detectó ${lesionInfo.fullName} con ${most_likely.probability}% de probabilidad. Se recomienda consultar con un dermatólogo para evaluación.`
+        color = 'text-yellow-600'
+        bgColor = 'bg-yellow-50'
+        borderColor = 'border-yellow-200'
+      } else {
+        title = 'Riesgo Bajo'
+        message = `Se detectó ${lesionInfo.fullName} con ${most_likely.probability}% de probabilidad. Mantén observación y chequeos regulares.`
+        color = 'text-green-600'
+        bgColor = 'bg-green-50'
+        borderColor = 'border-green-200'
+      }
+      
+      return { title, message, color, bgColor, borderColor, lesionInfo }
+    }
+    
+    // Fallback al método anterior
+    const probability = result.probability
     const numProbability = Number(probability)
     
     if (numProbability <= 30) {
@@ -248,19 +282,22 @@ const Analizar = () => {
               
               <div>
                 {(() => {
-                  const probability = result.result?.probability || result.probability
-                  console.log('Rendering recommendation for probability:', probability)
-                  const recommendation = getRecommendation(probability)
+                  const recommendation = getRecommendation(result)
                   return (
                     <div className={`p-6 rounded-lg border ${recommendation.bgColor} ${recommendation.borderColor}`}>
-                      <h4 className={`text-lg font-semibold mb-3 ${recommendation.color}`}>
-                        {recommendation.title}
-                      </h4>
-                      <p className="text-gray-800 dark:text-white leading-relaxed">
+                      <div className="flex items-center mb-3">
+                        {recommendation.lesionInfo && (
+                          <span className="text-2xl mr-3">{recommendation.lesionInfo.icon}</span>
+                        )}
+                        <h4 className={`text-lg font-semibold ${recommendation.color}`}>
+                          {recommendation.title}
+                        </h4>
+                      </div>
+                      <p className="text-white leading-relaxed">
                         {recommendation.message}
                       </p>
-                      <div className="mt-3 text-sm text-gray-500">
-                        Probabilidad: {probability}%
+                      <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                        Confianza del análisis: {Math.round((result.result?.confidence || result.confidence || 0.85) * 100)}%
                       </div>
                     </div>
                   )
@@ -276,6 +313,12 @@ const Analizar = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Análisis detallado */}
+          <div className="card">
+            <h4 className="text-lg font-semibold text-primary mb-4">Análisis Detallado</h4>
+            <DetailedAnalysisResults analysisResult={result} />
           </div>
 
           {/* Información adicional */}
