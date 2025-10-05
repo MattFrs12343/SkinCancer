@@ -1,13 +1,18 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { analysisService } from '../services/analysisService'
 import { ERROR_MESSAGES } from '../utils/constants'
 
 export const useImageAnalysis = () => {
+  // Estados simples y confiables
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
   const [progress, setProgress] = useState(0)
-  const [connectionStatus, setConnectionStatus] = useState('unknown') // 'online', 'offline', 'unknown'
+  const [connectionStatus, setConnectionStatus] = useState('unknown')
+
+  // Referencias para evitar re-creaciones
+  const progressIntervalRef = useRef(null)
+  const abortControllerRef = useRef(null)
 
   // Verificar conectividad
   const checkConnectivity = useCallback(async () => {
@@ -27,6 +32,12 @@ export const useImageAnalysis = () => {
       return { success: false, message: 'No hay archivo' }
     }
 
+    // Cancelar análisis anterior si existe
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    abortControllerRef.current = new AbortController()
+
     setIsAnalyzing(true)
     setError(null)
     setResult(null)
@@ -37,17 +48,21 @@ export const useImageAnalysis = () => {
 
     try {
       // Simular progreso durante el análisis
-      const progressInterval = setInterval(() => {
+      progressIntervalRef.current = setInterval(() => {
         setProgress(prev => {
           if (prev >= 90) return prev
-          return prev + Math.random() * 15
+          return Math.min(prev + Math.random() * 15, 90)
         })
       }, 300)
 
       console.log('Iniciando análisis de imagen...')
-      const analysisResult = await analysisService.analyzeImage(file)
+      const analysisResult = await analysisService.analyzeImage(file, {
+        signal: abortControllerRef.current.signal
+      })
 
-      clearInterval(progressInterval)
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current)
+      }
       setProgress(100)
 
       if (analysisResult.success) {
@@ -78,6 +93,11 @@ export const useImageAnalysis = () => {
         }
       }
     } catch (err) {
+      if (err.name === 'AbortError') {
+        console.log('Análisis cancelado')
+        return { success: false, message: 'Análisis cancelado' }
+      }
+
       console.error('Error inesperado en análisis:', err)
       
       const errorMessage = 'Error de conexión. Inténtalo de nuevo.'
@@ -91,23 +111,38 @@ export const useImageAnalysis = () => {
       }
     } finally {
       setIsAnalyzing(false)
-      // Mantener el progreso en 100% por un momento antes de resetear
+      
+      // Limpiar intervalos
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current)
+      }
+      
+      // Resetear progreso después de un tiempo
       setTimeout(() => {
-        if (!isAnalyzing) {
-          setProgress(0)
-        }
+        setProgress(0)
       }, 2000)
     }
   }, [checkConnectivity])
 
   const reset = useCallback(() => {
+    // Cancelar análisis en curso
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    
+    // Limpiar intervalos
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
+    }
+
     setIsAnalyzing(false)
     setResult(null)
     setError(null)
     setProgress(0)
+    // Mantener connectionStatus
   }, [])
 
-  // Obtener información del modelo
+  // Obtener información del modelo con caché
   const getModelInfo = useCallback(async () => {
     try {
       const modelInfo = await analysisService.getModelInfo()
@@ -118,7 +153,7 @@ export const useImageAnalysis = () => {
     }
   }, [])
 
-  // Verificar estado del servicio
+  // Verificar estado del servicio con caché
   const checkServiceHealth = useCallback(async () => {
     try {
       const health = await analysisService.checkHealth()
@@ -126,6 +161,16 @@ export const useImageAnalysis = () => {
     } catch (error) {
       console.error('Error verificando salud del servicio:', error)
       return { healthy: false, message: 'Error verificando servicio' }
+    }
+  }, [])
+
+  // Cleanup al desmontar
+  const cleanup = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current)
     }
   }, [])
 
@@ -142,6 +187,7 @@ export const useImageAnalysis = () => {
     reset,
     checkConnectivity,
     getModelInfo,
-    checkServiceHealth
+    checkServiceHealth,
+    cleanup
   }
 }

@@ -1,23 +1,16 @@
 import { useState, useRef } from 'react'
 import { validateImageFile, formatFileSize } from '../../utils/validators'
 import { ERROR_MESSAGES } from '../../utils/constants'
-import { useImageOptimization } from '../../hooks/useImageOptimization'
 
-const FileUpload = ({ onFileSelect, disabled = false, className = '', autoOptimize = true }) => {
+const FileUpload = ({ onFileSelect, selectedFile, disabled = false, className = '' }) => {
   const [dragActive, setDragActive] = useState(false)
-  const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
   const [error, setError] = useState('')
-  const [optimizing, setOptimizing] = useState(false)
-  const [optimizationInfo, setOptimizationInfo] = useState(null)
   const fileInputRef = useRef(null)
-  const { optimizeImage, getImageMetadata } = useImageOptimization()
 
   // Manejar selección de archivo
   const handleFileSelect = async (file) => {
     setError('')
-    setOptimizing(false)
-    setOptimizationInfo(null)
     
     // Validar archivo
     const validation = validateImageFile(file)
@@ -27,39 +20,16 @@ const FileUpload = ({ onFileSelect, disabled = false, className = '', autoOptimi
       return
     }
 
-    let finalFile = file
-    let optimizationResult = null
-
-    // Optimizar imagen si está habilitado
-    if (autoOptimize && file.size > 500 * 1024) { // Solo optimizar si es > 500KB
-      try {
-        setOptimizing(true)
-        optimizationResult = await optimizeImage(file)
-        
-        if (optimizationResult.optimized) {
-          finalFile = optimizationResult.file
-          setOptimizationInfo(optimizationResult)
-        }
-      } catch (error) {
-        console.warn('Error optimizando imagen:', error)
-        // Continuar con archivo original si falla la optimización
-      } finally {
-        setOptimizing(false)
-      }
-    }
-
     // Crear preview
     const reader = new FileReader()
     reader.onload = (e) => {
       setPreviewUrl(e.target.result)
     }
-    reader.readAsDataURL(finalFile)
-
-    setSelectedFile(finalFile)
+    reader.readAsDataURL(file)
     
     // Notificar al componente padre
     if (onFileSelect) {
-      onFileSelect(finalFile)
+      onFileSelect(file)
     }
   }
 
@@ -105,11 +75,8 @@ const FileUpload = ({ onFileSelect, disabled = false, className = '', autoOptimi
 
   // Limpiar selección
   const clearSelection = () => {
-    setSelectedFile(null)
     setPreviewUrl(null)
     setError('')
-    setOptimizing(false)
-    setOptimizationInfo(null)
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -150,20 +117,7 @@ const FileUpload = ({ onFileSelect, disabled = false, className = '', autoOptimi
         />
 
         {/* Contenido del área de upload */}
-        {optimizing ? (
-          // Vista de optimización
-          <div className="space-y-4">
-            <div className="flex justify-center">
-              <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
-            </div>
-            <div className="text-center">
-              <p className="text-accent font-medium">Optimizando imagen...</p>
-              <p className="text-sm text-gray-600 mt-1">
-                Comprimiendo para mejor rendimiento
-              </p>
-            </div>
-          </div>
-        ) : selectedFile ? (
+        {selectedFile ? (
           // Vista con archivo seleccionado
           <div className="space-y-4">
             {previewUrl && (
@@ -180,16 +134,6 @@ const FileUpload = ({ onFileSelect, disabled = false, className = '', autoOptimi
               <p className="text-sm text-gray-600 mt-1">
                 {selectedFile.name} ({formatFileSize(selectedFile.size)})
               </p>
-              {optimizationInfo && optimizationInfo.optimized && (
-                <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded text-xs">
-                  <p className="text-green-700">
-                    ✨ Imagen optimizada: {optimizationInfo.compressionRatio}% reducción
-                  </p>
-                  <p className="text-green-600">
-                    {formatFileSize(optimizationInfo.originalSize)} → {formatFileSize(optimizationInfo.compressedSize)}
-                  </p>
-                </div>
-              )}
             </div>
             <button
               type="button"

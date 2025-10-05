@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { AuthProvider } from './hooks/useAuth.jsx'
 import { ThemeProvider } from './hooks/useTheme.jsx'
 import ProtectedRoute from './components/auth/ProtectedRoute'

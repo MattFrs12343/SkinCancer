@@ -32,7 +32,13 @@ const Analizar = () => {
 
   const handleAnalyze = async () => {
     if (selectedFile) {
-      await analyzeImage(selectedFile)
+      console.log('Iniciando análisis desde componente:', selectedFile.name)
+      try {
+        const result = await analyzeImage(selectedFile)
+        console.log('Resultado del análisis:', result)
+      } catch (error) {
+        console.error('Error en handleAnalyze:', error)
+      }
     }
   }
 
@@ -250,7 +256,7 @@ const Analizar = () => {
                       <h4 className={`text-lg font-semibold mb-3 ${recommendation.color}`}>
                         {recommendation.title}
                       </h4>
-                      <p className="text-white leading-relaxed">
+                      <p className="text-gray-800 dark:text-white leading-relaxed">
                         {recommendation.message}
                       </p>
                       <div className="mt-3 text-sm text-gray-500">

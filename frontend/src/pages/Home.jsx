@@ -1,7 +1,110 @@
 import { Link } from 'react-router-dom'
+import { memo, useMemo, lazy, Suspense } from 'react'
 import AdaptiveSVG from '../components/ui/AdaptiveSVG'
 
-const Home = () => {
+// Lazy loading de componentes pesados
+const PerformanceMonitor = lazy(() => import('../components/common/PerformanceMonitor'))
+
+const Home = memo(() => {
+  // Memoizar datos estáticos para evitar re-creaciones
+  const features = useMemo(() => [
+    {
+      id: 'rapid-analysis',
+      icon: 'lightning',
+      title: 'IA Avanzada',
+      description: 'Análisis rápido',
+      gradient: 'from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20'
+    },
+    {
+      id: 'easy-use',
+      icon: 'list',
+      title: 'Fácil de usar',
+      description: 'Interfaz intuitiva',
+      gradient: 'from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20'
+    },
+    {
+      id: 'clear-results',
+      icon: 'image',
+      title: 'Resultados claros',
+      description: 'Visuales precisos',
+      gradient: 'from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20'
+    },
+    {
+      id: 'privacy',
+      icon: 'shield',
+      title: 'Privacidad',
+      description: 'Datos seguros',
+      gradient: 'from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20'
+    }
+  ], [])
+
+  const howItWorksSteps = useMemo(() => [
+    {
+      id: 'upload',
+      emoji: '📸',
+      title: 'Sube tu imagen',
+      description: 'Toma una foto clara de la zona de piel que quieres analizar o sube una imagen existente.',
+      gradient: 'from-blue-400 to-blue-600'
+    },
+    {
+      id: 'analyze',
+      emoji: '🤖',
+      title: 'Análisis con IA',
+      description: 'Nuestro modelo de inteligencia artificial procesa la imagen y analiza las características de la piel.',
+      gradient: 'from-purple-400 to-purple-600'
+    },
+    {
+      id: 'results',
+      emoji: '📊',
+      title: 'Obtén resultados',
+      description: 'Recibe un porcentaje de probabilidad y recomendaciones para consultar con un especialista.',
+      gradient: 'from-green-400 to-green-600'
+    }
+  ], [])
+
+  const doctorAdvantages = useMemo(() => [
+    {
+      id: 'diagnostic-support',
+      title: 'Herramienta de apoyo diagnóstico',
+      description: 'Complementa el criterio médico con análisis basado en IA'
+    },
+    {
+      id: 'early-detection',
+      title: 'Detección temprana',
+      description: 'Ayuda a identificar casos que requieren atención prioritaria'
+    },
+    {
+      id: 'consultation-efficiency',
+      title: 'Eficiencia en consultas',
+      description: 'Optimiza el tiempo de evaluación inicial'
+    },
+    {
+      id: 'visual-documentation',
+      title: 'Documentación visual',
+      description: 'Facilita el seguimiento y comparación de lesiones'
+    }
+  ], [])
+
+  // Renderizar características de forma optimizada
+  const renderFeatures = useMemo(() => (
+    <div className="grid grid-cols-2 gap-3">
+      {features.map((feature) => (
+        <div key={feature.id} className={`bg-gradient-to-r ${feature.gradient} p-3 rounded-lg group hover:shadow-md transition-all duration-200`}>
+          <div className="flex items-center">
+            <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-xs font-bold text-primary">{feature.title}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">{feature.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ), [features])
   return (
     <div className="py-8 space-y-16">
       {/* Hero Section */}
@@ -85,63 +188,7 @@ const Home = () => {
             </div>
 
             {/* Características en grid compacto */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary">IA Avanzada</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">Análisis rápido</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary">Fácil de usar</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">Interfaz intuitiva</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary">Resultados claros</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">Visuales precisos</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary">Privacidad</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">Datos seguros</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {renderFeatures}
           </div>
 
           {/* Información técnica compacta */}
@@ -197,36 +244,18 @@ const Home = () => {
           ¿Cómo funciona?
         </h2>
         
-
-        
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
-              <span className="text-4xl">📸</span>
+          {howItWorksSteps.map((step) => (
+            <div key={step.id} className="text-center">
+              <div className={`w-20 h-20 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200`}>
+                <span className="text-4xl">{step.emoji}</span>
+              </div>
+              <h3 className="text-xl font-semibold text-primary mb-3">{step.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {step.description}
+              </p>
             </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">Sube tu imagen</h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Toma una foto clara de la zona de piel que quieres analizar o sube una imagen existente.
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
-              <span className="text-4xl">🤖</span>
-            </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">Análisis con IA</h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Nuestro modelo de inteligencia artificial procesa la imagen y analiza las características de la piel.
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform duration-200">
-              <span className="text-4xl">📊</span>
-            </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">Obtén resultados</h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Recibe un porcentaje de probabilidad y recomendaciones para consultar con un especialista.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -236,46 +265,21 @@ const Home = () => {
           Ventajas para Médicos
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <span className="text-white text-sm">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-primary mb-2">Herramienta de apoyo diagnóstico</h3>
-                <p className="text-gray-600 dark:text-gray-300">Complementa el criterio médico con análisis basado en IA</p>
-              </div>
+          {[doctorAdvantages.slice(0, 2), doctorAdvantages.slice(2, 4)].map((column, columnIndex) => (
+            <div key={columnIndex} className="space-y-4">
+              {column.map((advantage) => (
+                <div key={advantage.id} className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-primary mb-2">{advantage.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{advantage.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <span className="text-white text-sm">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-primary mb-2">Detección temprana</h3>
-                <p className="text-gray-600 dark:text-gray-300">Ayuda a identificar casos que requieren atención prioritaria</p>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <span className="text-white text-sm">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-primary mb-2">Eficiencia en consultas</h3>
-                <p className="text-gray-600 dark:text-gray-300">Optimiza el tiempo de evaluación inicial</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                <span className="text-white text-sm">✓</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-primary mb-2">Documentación visual</h3>
-                <p className="text-gray-600 dark:text-gray-300">Facilita el seguimiento y comparación de lesiones</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -703,8 +707,11 @@ const Home = () => {
       </section>
 
 
+
     </div>
   )
-}
+})
+
+Home.displayName = 'Home'
 
 export default Home

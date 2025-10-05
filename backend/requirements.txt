@@ -9,3 +9,5 @@ pydantic==2.5.0
 pydantic-settings==2.1.0
 numpy==1.24.3
 python-magic==0.4.27
+psutil==5.9.6
+redis==5.0.1

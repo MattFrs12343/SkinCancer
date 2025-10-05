@@ -1,10 +1,14 @@
 import { APP_CONFIG, ERROR_CODES, ERROR_MESSAGES } from '../utils/constants'
 import { authService } from './authService'
+import cacheService, { withCache } from './cacheService'
 
 class AnalysisService {
   constructor() {
     this.baseUrl = APP_CONFIG.api.baseUrl
     this.timeout = APP_CONFIG.api.timeout
+    this.requestCache = new Map()
+    this.lastHealthCheck = null
+    this.healthCheckInterval = 30000 // 30 segundos
   }
 
   // Crear headers con autenticación
@@ -19,22 +23,48 @@ class AnalysisService {
     return headers
   }
 
-  // Realizar request con timeout y manejo de errores
+  // Realizar request con timeout, caché y manejo de errores optimizado
   async makeRequest(url, options = {}) {
+    const { signal: externalSignal, ...restOptions } = options
     const controller = new AbortController()
+    
+    // Combinar señales de abort si existe una externa
+    if (externalSignal) {
+      externalSignal.addEventListener('abort', () => controller.abort())
+    }
+    
     const timeoutId = setTimeout(() => controller.abort(), this.timeout)
+
+    // Generar clave de caché para requests GET
+    const cacheKey = options.method === 'GET' ? `request_${url}` : null
+    
+    // Verificar caché para requests GET
+    if (cacheKey && cacheService.has(cacheKey)) {
+      clearTimeout(timeoutId)
+      return { 
+        ok: true, 
+        json: () => Promise.resolve(cacheService.get(cacheKey))
+      }
+    }
 
     try {
       const response = await fetch(url, {
-        ...options,
+        ...restOptions,
         signal: controller.signal,
         headers: {
           ...this.getAuthHeaders(),
-          ...options.headers
+          ...restOptions.headers
         }
       })
 
       clearTimeout(timeoutId)
+      
+      // Guardar en caché si es exitoso y es GET
+      if (response.ok && cacheKey) {
+        const data = await response.clone().json()
+        cacheService.set(cacheKey, data, 60000) // 1 minuto de caché
+      }
+      
       return response
     } catch (error) {
       clearTimeout(timeoutId)
@@ -45,8 +75,16 @@ class AnalysisService {
     }
   }
 
+  // Generar hash de archivo para caché
+  async generateFileHash(file) {
+    const buffer = await file.arrayBuffer()
+    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+  }
+
   // Analizar imagen
-  async analyzeImage(file) {
+  async analyzeImage(file, options = {}) {
     try {
       console.log('Iniciando análisis de imagen:', file.name)
       
@@ -68,6 +106,7 @@ class AnalysisService {
       const response = await this.makeRequest(`${this.baseUrl}/api/analysis/upload`, {
         method: 'POST',
         body: formData,
+        signal: options.signal,
         // No establecer Content-Type, el navegador lo hará automáticamente con boundary
       })
 
@@ -210,10 +249,12 @@ class AnalysisService {
     })
   }
 
-  // Obtener información del modelo de IA
-  async getModelInfo() {
-    try {
-      const response = await this.makeRequest(`${this.baseUrl}/api/analysis/model-info`)
+  // Obtener información del modelo de IA con caché
+  getModelInfo = withCache(
+    async () => {
+      const response = await this.makeRequest(`${this.baseUrl}/api/analysis/model-info`, {
+        method: 'GET'
+      })
       
       if (response.ok) {
         const data = await response.json()
@@ -221,20 +262,10 @@ class AnalysisService {
       } else {
         return { success: false, message: 'Error obteniendo información del modelo' }
       }
-    } catch (error) {
-      console.error('Error obteniendo info del modelo:', error)
-      return {
-        success: false,
-        message: 'Error de conexión',
-        fallback: {
-          model_name: 'SkinCancer AI Detector (Simulado)',
-          version: '1.0.0-local',
-          accuracy: 0.95,
-          status: 'offline'
-        }
-      }
-    }
-  }
+    },
+    () => 'model_info',
+    300000 // 5 minutos de caché
+  )
 
   // Obtener estadísticas del servicio
   async getStats() {
@@ -253,47 +284,102 @@ class AnalysisService {
     }
   }
 
-  // Validar estado del servicio
+  // Validar estado del servicio con caché inteligente
   async checkHealth() {
+    const now = Date.now()
+    
+    // Usar caché si el último check fue reciente
+    if (this.lastHealthCheck && (now - this.lastHealthCheck.timestamp) < this.healthCheckInterval) {
+      return this.lastHealthCheck.result
+    }
+
     try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 5000)
+
       const response = await fetch(`${this.baseUrl}/api/analysis/health`, {
         method: 'GET',
-        signal: AbortSignal.timeout(5000) // 5 segundos timeout
+        signal: controller.signal
       })
       
+      clearTimeout(timeoutId)
+      
+      let result
       if (response.ok) {
         const data = await response.json()
-        return { 
+        result = { 
           healthy: true, 
           data,
           message: 'Servicio disponible'
         }
       } else {
-        return { 
+        result = { 
           healthy: false, 
           message: 'Servicio no disponible'
         }
       }
+
+      // Guardar en caché
+      this.lastHealthCheck = {
+        timestamp: now,
+        result
+      }
+
+      return result
     } catch (error) {
       console.warn('Servicio de análisis no disponible:', error.message)
-      return { 
+      
+      const result = { 
         healthy: false, 
         message: 'Servicio offline',
         error: error.message
       }
+
+      // Guardar resultado negativo en caché por menos tiempo
+      this.lastHealthCheck = {
+        timestamp: now,
+        result
+      }
+
+      return result
     }
   }
 
-  // Verificar conectividad general
-  async checkConnectivity() {
-    try {
-      const response = await fetch(`${this.baseUrl}/health`, {
-        method: 'GET',
-        signal: AbortSignal.timeout(3000)
-      })
-      return response.ok
-    } catch (error) {
-      return false
+  // Verificar conectividad general con caché
+  checkConnectivity = withCache(
+    async () => {
+      try {
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 3000)
+        
+        const response = await fetch(`${this.baseUrl}/health`, {
+          method: 'GET',
+          signal: controller.signal
+        })
+        
+        clearTimeout(timeoutId)
+        return response.ok
+      } catch (error) {
+        return false
+      }
+    },
+    () => 'connectivity_check',
+    10000 // 10 segundos de caché
+  )
+
+  // Limpiar caché manualmente
+  clearCache() {
+    this.requestCache.clear()
+    this.lastHealthCheck = null
+    cacheService.clear()
+  }
+
+  // Obtener estadísticas de rendimiento
+  getPerformanceStats() {
+    return {
+      cacheStats: cacheService.getStats(),
+      lastHealthCheck: this.lastHealthCheck?.timestamp,
+      requestCacheSize: this.requestCache.size
     }
   }
 }
