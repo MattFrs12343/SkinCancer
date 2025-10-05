@@ -1,0 +1,77 @@
+name: 🎯 Commit Trigger Notification
+
+# 🚨 TRIGGER: Se ejecuta en CADA commit
+on:
+  push:
+    branches: [ '**' ]  # Todas las ramas
+
+jobs:
+  commit-notification:
+    name: 📢 Commit Notification
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout código
+      uses: actions/checkout@v4
+      
+    - name: 🎉 Notificación de commit
+      run: |
+        echo "🚀 ¡Nuevo commit detectado en OncoDerma!"
+        echo "=================================="
+        echo "👤 Autor: ${{ github.event.head_commit.author.name }}"
+        echo "📧 Email: ${{ github.event.head_commit.author.email }}"
+        echo "🌿 Rama: ${{ github.ref_name }}"
+        echo "📝 SHA: ${{ github.sha }}"
+        echo "💬 Mensaje: ${{ github.event.head_commit.message }}"
+        echo "📅 Timestamp: ${{ github.event.head_commit.timestamp }}"
+        echo "🔗 URL: ${{ github.event.head_commit.url }}"
+        echo "=================================="
+        
+    - name: 📊 Análisis de cambios
+      run: |
+        echo "📋 Archivos modificados:"
+        git diff --name-only HEAD~1 HEAD || echo "No hay commits previos"
+        echo ""
+        echo "📈 Estadísticas del commit:"
+        git diff --stat HEAD~1 HEAD || echo "No hay commits previos"
+        
+    - name: 🏷️ Detectar tipo de cambio
+      run: |
+        COMMIT_MSG="${{ github.event.head_commit.message }}"
+        echo "🔍 Analizando tipo de commit..."
+        
+        if [[ "$COMMIT_MSG" == *"feat"* ]] || [[ "$COMMIT_MSG" == *"feature"* ]]; then
+          echo "✨ Tipo: Nueva funcionalidad"
+        elif [[ "$COMMIT_MSG" == *"fix"* ]] || [[ "$COMMIT_MSG" == *"bug"* ]]; then
+          echo "🐛 Tipo: Corrección de bug"
+        elif [[ "$COMMIT_MSG" == *"docs"* ]]; then
+          echo "📚 Tipo: Documentación"
+        elif [[ "$COMMIT_MSG" == *"style"* ]]; then
+          echo "💄 Tipo: Cambios de estilo"
+        elif [[ "$COMMIT_MSG" == *"refactor"* ]]; then
+          echo "♻️ Tipo: Refactorización"
+        elif [[ "$COMMIT_MSG" == *"test"* ]]; then
+          echo "🧪 Tipo: Tests"
+        else
+          echo "📝 Tipo: Cambio general"
+        fi
+        
+    - name: 🎯 Crear issue automático (si es bug)
+      if: contains(github.event.head_commit.message, 'fix') || contains(github.event.head_commit.message, 'bug')
+      run: |
+        echo "🐛 Bug fix detectado - se podría crear un issue automático"
+        echo "Commit: ${{ github.event.head_commit.message }}"
+        
+    - name: 📋 Summary para GitHub
+      run: |
+        echo "## 🎯 Commit Trigger Activado" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📊 Información del Commit" >> $GITHUB_STEP_SUMMARY
+        echo "- **👤 Autor:** ${{ github.event.head_commit.author.name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **🌿 Rama:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **📝 SHA:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- **💬 Mensaje:** ${{ github.event.head_commit.message }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **📅 Fecha:** ${{ github.event.head_commit.timestamp }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 🎉 Trigger ejecutado exitosamente!" >> $GITHUB_STEP_SUMMARY
+        echo "Este workflow se ejecuta automáticamente en cada commit para monitorear cambios en OncoDerma." >> $GITHUB_STEP_SUMMARY
