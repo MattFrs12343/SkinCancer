@@ -10,7 +10,7 @@ const Home = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
             Bienvenido a OncoDerma
           </h1>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
             Análisis de imágenes de piel con inteligencia artificial para apoyo en la detección temprana
           </p>
           
@@ -36,7 +36,7 @@ const Home = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold text-primary">¿Qué es OncoDerma?</h2>
-              <p className="text-sm text-gray-600">Inteligencia artificial para análisis dermatológico</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Inteligencia artificial para análisis dermatológico</p>
             </div>
           </div>
           <div className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium flex items-center">
@@ -50,7 +50,7 @@ const Home = () => {
         <div className="grid md:grid-cols-3 gap-4">
           {/* Descripción principal */}
           <div className="md:col-span-2 space-y-4">
-            <div className="bg-gradient-to-r from-cyan-50 to-cyan-100 p-4 rounded-lg">
+            <div className="bg-gradient-to-r from-cyan-50 to-cyan-100 dark:from-cyan-900/20 dark:to-cyan-800/20 p-4 rounded-lg">
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center mr-3 mt-0.5">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -59,7 +59,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-primary text-sm mb-2">Aplicación Innovadora</h4>
-                  <p className="text-xs text-gray-600 leading-relaxed">
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
                     OncoDerma utiliza inteligencia artificial para analizar imágenes de la piel 
                     y proporcionar estimaciones del riesgo de cáncer de piel.
                   </p>
@@ -67,7 +67,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-teal-50 to-teal-100 p-4 rounded-lg">
+            <div className="bg-gradient-to-r from-teal-50 to-teal-100 dark:from-teal-900/20 dark:to-teal-800/20 p-4 rounded-lg">
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center mr-3 mt-0.5">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -76,7 +76,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-primary text-sm mb-2">Herramienta de Apoyo</h4>
-                  <p className="text-xs text-gray-600 leading-relaxed">
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
                     Diseñada para ayudar tanto a pacientes como a profesionales de la salud 
                     en la detección temprana de anomalías en la piel.
                   </p>
@@ -86,7 +86,7 @@ const Home = () => {
 
             {/* Características en grid compacto */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
                 <div className="flex items-center">
                   <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -95,12 +95,12 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-primary">IA Avanzada</p>
-                    <p className="text-xs text-gray-600">Análisis rápido</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">Análisis rápido</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-green-50 to-green-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
                 <div className="flex items-center">
                   <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -109,12 +109,12 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-primary">Fácil de usar</p>
-                    <p className="text-xs text-gray-600">Interfaz intuitiva</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">Interfaz intuitiva</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
                 <div className="flex items-center">
                   <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -123,12 +123,12 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-primary">Resultados claros</p>
-                    <p className="text-xs text-gray-600">Visuales precisos</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">Visuales precisos</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
+              <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-3 rounded-lg group hover:shadow-md transition-all duration-200">
                 <div className="flex items-center">
                   <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-2 group-hover:scale-110 transition-transform duration-200">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -137,7 +137,7 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-primary">Privacidad</p>
-                    <p className="text-xs text-gray-600">Datos seguros</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">Datos seguros</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ const Home = () => {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-primary">Dermatología digital</p>
-                  <p className="text-xs text-gray-600">Análisis especializado</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Análisis especializado</p>
                 </div>
               </div>
               
@@ -171,7 +171,7 @@ const Home = () => {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-primary">Detección temprana</p>
-                  <p className="text-xs text-gray-600">Prevención efectiva</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Prevención efectiva</p>
                 </div>
               </div>
               
@@ -183,7 +183,7 @@ const Home = () => {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-primary">Apoyo médico</p>
-                  <p className="text-xs text-gray-600">Herramienta profesional</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Herramienta profesional</p>
                 </div>
               </div>
             </div>
@@ -205,7 +205,7 @@ const Home = () => {
               <span className="text-4xl">📸</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Sube tu imagen</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Toma una foto clara de la zona de piel que quieres analizar o sube una imagen existente.
             </p>
           </div>
@@ -214,7 +214,7 @@ const Home = () => {
               <span className="text-4xl">🤖</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Análisis con IA</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Nuestro modelo de inteligencia artificial procesa la imagen y analiza las características de la piel.
             </p>
           </div>
@@ -223,7 +223,7 @@ const Home = () => {
               <span className="text-4xl">📊</span>
             </div>
             <h3 className="text-xl font-semibold text-primary mb-3">Obtén resultados</h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Recibe un porcentaje de probabilidad y recomendaciones para consultar con un especialista.
             </p>
           </div>
@@ -243,7 +243,7 @@ const Home = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-primary mb-2">Herramienta de apoyo diagnóstico</h3>
-                <p className="text-gray-600">Complementa el criterio médico con análisis basado en IA</p>
+                <p className="text-gray-600 dark:text-gray-300">Complementa el criterio médico con análisis basado en IA</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
@@ -252,7 +252,7 @@ const Home = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-primary mb-2">Detección temprana</h3>
-                <p className="text-gray-600">Ayuda a identificar casos que requieren atención prioritaria</p>
+                <p className="text-gray-600 dark:text-gray-300">Ayuda a identificar casos que requieren atención prioritaria</p>
               </div>
             </div>
           </div>
@@ -263,7 +263,7 @@ const Home = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-primary mb-2">Eficiencia en consultas</h3>
-                <p className="text-gray-600">Optimiza el tiempo de evaluación inicial</p>
+                <p className="text-gray-600 dark:text-gray-300">Optimiza el tiempo de evaluación inicial</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
@@ -272,7 +272,7 @@ const Home = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-primary mb-2">Documentación visual</h3>
-                <p className="text-gray-600">Facilita el seguimiento y comparación de lesiones</p>
+                <p className="text-gray-600 dark:text-gray-300">Facilita el seguimiento y comparación de lesiones</p>
               </div>
             </div>
           </div>
@@ -290,7 +290,7 @@ const Home = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold text-primary">Seguridad y Privacidad</h2>
-              <p className="text-sm text-gray-600">Tu privacidad es nuestra prioridad</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Tu privacidad es nuestra prioridad</p>
             </div>
           </div>
           <div className="bg-green-600/10 text-green-600 px-3 py-1 rounded-full text-xs font-medium flex items-center">
@@ -304,7 +304,7 @@ const Home = () => {
         <div className="grid md:grid-cols-3 gap-4">
           {/* Características de privacidad */}
           <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="flex items-center p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="flex items-center p-3 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -312,11 +312,11 @@ const Home = () => {
               </div>
               <div className="flex-1">
                 <p className="font-medium text-primary text-sm">Eliminación automática</p>
-                <p className="text-xs text-gray-600">Imágenes borradas inmediatamente</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Imágenes borradas inmediatamente</p>
               </div>
             </div>
 
-            <div className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -324,11 +324,11 @@ const Home = () => {
               </div>
               <div className="flex-1">
                 <p className="font-medium text-primary text-sm">Sin almacenamiento</p>
-                <p className="text-xs text-gray-600">No guardamos información personal</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">No guardamos información personal</p>
               </div>
             </div>
 
-            <div className="flex items-center p-3 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="flex items-center p-3 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -336,11 +336,11 @@ const Home = () => {
               </div>
               <div className="flex-1">
                 <p className="font-medium text-primary text-sm">Cifrado HTTPS</p>
-                <p className="text-xs text-gray-600">Comunicación completamente segura</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Comunicación completamente segura</p>
               </div>
             </div>
 
-            <div className="flex items-center p-3 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="flex items-center p-3 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-200">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -390,7 +390,7 @@ const Home = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold text-primary">Resultados Confiables</h2>
-              <p className="text-sm text-gray-600">IA entrenada con miles de imágenes dermatológicas</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">IA entrenada con miles de imágenes dermatológicas</p>
             </div>
           </div>
           <div className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-medium flex items-center">
@@ -404,7 +404,7 @@ const Home = () => {
         <div className="grid md:grid-cols-4 gap-4">
           {/* Métricas principales */}
           <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
               <div className="flex items-center justify-between mb-2">
                 <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -421,7 +421,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
               <div className="flex items-center justify-between mb-2">
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -438,7 +438,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
               <div className="flex items-center justify-between mb-2">
                 <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -447,7 +447,7 @@ const Home = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-primary">24/7</div>
-                  <p className="text-xs text-gray-600">Disponible</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Disponible</p>
                 </div>
               </div>
               <div className="w-full bg-purple-200 rounded-full h-2">
@@ -471,7 +471,7 @@ const Home = () => {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-primary">Miles de imágenes</p>
-                  <p className="text-xs text-gray-600">Dataset entrenado</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Dataset entrenado</p>
                 </div>
               </div>
               
@@ -483,7 +483,7 @@ const Home = () => {
                 </div>
                 <div>
                   <p className="text-xs font-medium text-primary">Algoritmos avanzados</p>
-                  <p className="text-xs text-gray-600">Deep Learning</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300">Deep Learning</p>
                 </div>
               </div>
               
@@ -527,7 +527,7 @@ const Home = () => {
 
         <div className="grid md:grid-cols-2 gap-4">
           {/* Testimonio de paciente */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
             <div className="flex items-start mb-3">
               <AdaptiveSVG 
                 src="/img/avatar-maria-gonzalez.svg" 
@@ -562,7 +562,7 @@ const Home = () => {
           </div>
 
           {/* Testimonio de médico */}
-          <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-lg group hover:shadow-lg transition-all duration-200">
             <div className="flex items-start mb-3">
               <AdaptiveSVG 
                 src="/img/avatar-dr-carlos-ruiz.svg" 
@@ -623,7 +623,7 @@ const Home = () => {
         <div className="grid md:grid-cols-2 gap-4">
           {/* Términos principales */}
           <div className="space-y-3">
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -637,7 +637,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -653,7 +653,7 @@ const Home = () => {
           </div>
 
           <div className="space-y-3">
-            <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
+            <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-4 rounded-lg group hover:shadow-md transition-all duration-200">
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-200">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">

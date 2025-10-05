@@ -6,7 +6,7 @@ const ThemeToggle = ({ className = '' }) => {
   return (
     <button
       onClick={toggleTheme}
-      className={`relative p-2 rounded-lg transition-all duration-300 hover:bg-gray-50 ${className}`}
+      className={`relative p-2 rounded-lg transition-all duration-300 hover:bg-primary/10 ${className}`}
       aria-label={`Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`}
       title={`Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`}
     >
