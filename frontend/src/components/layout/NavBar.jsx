@@ -63,7 +63,7 @@ const NavBar = () => {
             {/* Usuario y logout */}
             <div className="flex items-center space-x-4 ml-6 pl-6 border-l border-gray-200">
               <span className="text-sm text-gray-600">
-                Hola, <span className="font-medium text-primary">{user?.username}</span>
+                Hola, <span className="font-medium text-primary">{user?.displayName || user?.username}</span>
               </span>
               <button
                 onClick={handleLogout}
@@ -139,7 +139,7 @@ const NavBar = () => {
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="px-3 py-2">
               <div className="text-sm text-gray-600 mb-2">
-                Hola, <span className="font-medium text-primary">{user?.username}</span>
+                Hola, <span className="font-medium text-primary">{user?.displayName || user?.username}</span>
               </div>
               <button
                 onClick={handleLogout}

@@ -94,8 +94,9 @@ class AuthService {
     const isValid = this.validateCredentialsLocal(username, password)
     
     if (isValid) {
+      const userInfo = this.getUserInfo(username)
       const localUser = {
-        username: username.trim(),
+        ...userInfo,
         login_time: Date.now(),
         source: 'local'
       }
@@ -108,7 +109,7 @@ class AuthService {
       
       return {
         success: true,
-        message: 'Autenticación exitosa (modo local)',
+        message: `¡Bienvenido/a ${userInfo.displayName}! (modo local)`,
         user: localUser,
         token: localToken
       }
@@ -232,8 +233,53 @@ class AuthService {
 
   // Validación local de credenciales (fallback)
   validateCredentialsLocal(username, password) {
-    const { credentials } = APP_CONFIG.auth
-    return username.trim() === credentials.username && password === credentials.password
+    const { validUsers, staticPassword, credentials } = APP_CONFIG.auth
+    const trimmedUsername = username.trim()
+    
+    // Verificar contraseña estática
+    if (password !== staticPassword) {
+      return false
+    }
+    
+    // Buscar usuario en la lista de usuarios válidos
+    const user = validUsers.find(u => 
+      u.username.toLowerCase() === trimmedUsername.toLowerCase()
+    )
+    
+    if (user) {
+      return true
+    }
+    
+    // Mantener compatibilidad con credenciales legacy
+    return trimmedUsername === credentials.username && password === credentials.password
+  }
+
+  // Obtener información del usuario
+  getUserInfo(username) {
+    const { validUsers } = APP_CONFIG.auth
+    const trimmedUsername = username.trim()
+    
+    // Buscar en usuarios válidos
+    const user = validUsers.find(u => 
+      u.username.toLowerCase() === trimmedUsername.toLowerCase()
+    )
+    
+    if (user) {
+      return {
+        username: user.username,
+        displayName: user.displayName,
+        role: user.role,
+        email: user.email
+      }
+    }
+    
+    // Usuario legacy o no encontrado
+    return {
+      username: trimmedUsername,
+      displayName: trimmedUsername,
+      role: 'Usuario',
+      email: `${trimmedUsername.toLowerCase()}@oncoderma.com`
+    }
   }
 
   // Verificar estado de conexión con el servidor

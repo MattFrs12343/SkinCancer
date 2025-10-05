@@ -2,8 +2,25 @@ import { APP_CONFIG, ERROR_CODES } from './constants'
 
 // Validar credenciales de login
 export const validateCredentials = (username, password) => {
-  const { credentials } = APP_CONFIG.auth
-  return username === credentials.username && password === credentials.password
+  const { validUsers, staticPassword, credentials } = APP_CONFIG.auth
+  const trimmedUsername = username.trim()
+  
+  // Verificar contraseña estática
+  if (password !== staticPassword) {
+    return false
+  }
+  
+  // Buscar usuario en la lista de usuarios válidos
+  const user = validUsers.find(u => 
+    u.username.toLowerCase() === trimmedUsername.toLowerCase()
+  )
+  
+  if (user) {
+    return true
+  }
+  
+  // Mantener compatibilidad con credenciales legacy
+  return trimmedUsername === credentials.username && password === credentials.password
 }
 
 // Validar archivo de imagen

@@ -6,12 +6,44 @@ import time
 import logging
 import hashlib
 import secrets
+import asyncio
 
 router = APIRouter()
 security = HTTPBearer(auto_error=False)
 logger = logging.getLogger(__name__)
 
-# Credenciales estáticas para demo
+# Usuarios válidos para demo
+VALID_USERS = [
+    {
+        "username": "Matias",
+        "display_name": "Matias Franco",
+        "role": "Administrador",
+        "email": "matias@oncoderma.com"
+    },
+    {
+        "username": "Bianca", 
+        "display_name": "Bianca García",
+        "role": "Doctora",
+        "email": "bianca@oncoderma.com"
+    },
+    {
+        "username": "Melissa",
+        "display_name": "Melissa López", 
+        "role": "Especialista",
+        "email": "melissa@oncoderma.com"
+    },
+    {
+        "username": "Carlos",
+        "display_name": "Carlos Rodríguez",
+        "role": "Médico", 
+        "email": "carlos@oncoderma.com"
+    }
+]
+
+# Contraseña estática para todos los usuarios
+STATIC_PASSWORD = "1234"
+
+# Credenciales legacy (mantener compatibilidad)
 DEMO_CREDENTIALS = {
     "username": "admin",
     "password": "1234"
@@ -62,16 +94,42 @@ async def login(credentials: LoginRequest):
                 message="Usuario y contraseña son requeridos"
             )
         
-        # Validar credenciales estáticas
-        if (credentials.username.strip() == DEMO_CREDENTIALS["username"] and 
-            credentials.password == DEMO_CREDENTIALS["password"]):
-            
+        # Validar contraseña estática
+        if credentials.password != STATIC_PASSWORD:
+            logger.warning(f"Contraseña incorrecta para usuario: {credentials.username}")
+            return LoginResponse(
+                success=False,
+                message="Usuario o contraseña incorrectos"
+            )
+        
+        # Buscar usuario en la lista de usuarios válidos
+        user_info = None
+        username_lower = credentials.username.strip().lower()
+        
+        for user in VALID_USERS:
+            if user["username"].lower() == username_lower:
+                user_info = user
+                break
+        
+        # Si no se encuentra, verificar credenciales legacy
+        if not user_info and (credentials.username.strip() == DEMO_CREDENTIALS["username"]):
+            user_info = {
+                "username": "admin",
+                "display_name": "Administrador",
+                "role": "Admin",
+                "email": "admin@oncoderma.com"
+            }
+        
+        if user_info:
             # Generar token único
-            token = generate_token(credentials.username)
+            token = generate_token(user_info["username"])
             
             # Información del usuario
             user_data = {
-                "username": credentials.username,
+                "username": user_info["username"],
+                "displayName": user_info["display_name"],
+                "role": user_info["role"],
+                "email": user_info["email"],
                 "is_authenticated": True,
                 "login_time": time.time()
             }
@@ -79,16 +137,16 @@ async def login(credentials: LoginRequest):
             # Almacenar token (en producción usar Redis con TTL)
             active_tokens[token] = user_data
             
-            logger.info(f"Login exitoso para usuario: {credentials.username}")
+            logger.info(f"Login exitoso para usuario: {user_info['display_name']} ({user_info['username']})")
             
             return LoginResponse(
                 success=True,
-                message="Autenticación exitosa",
+                message=f"¡Bienvenido/a {user_info['display_name']}!",
                 token=token,
                 user=user_data
             )
         else:
-            logger.warning(f"Credenciales incorrectas para usuario: {credentials.username}")
+            logger.warning(f"Usuario no encontrado: {credentials.username}")
             return LoginResponse(
                 success=False,
                 message="Usuario o contraseña incorrectos"

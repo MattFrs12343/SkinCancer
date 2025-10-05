@@ -16,6 +16,36 @@ export const APP_CONFIG = {
     allowedTypes: ['image/jpeg', 'image/jpg', 'image/png'],
   },
   auth: {
+    // Contraseña estática para todos los usuarios
+    staticPassword: '1234',
+    // Lista de usuarios válidos
+    validUsers: [
+      {
+        username: 'Matias',
+        displayName: 'Matias Franco',
+        role: 'Administrador',
+        email: 'matias@oncoderma.com'
+      },
+      {
+        username: 'Bianca',
+        displayName: 'Bianca García',
+        role: 'Doctora',
+        email: 'bianca@oncoderma.com'
+      },
+      {
+        username: 'Melissa',
+        displayName: 'Melissa López',
+        role: 'Especialista',
+        email: 'melissa@oncoderma.com'
+      },
+      {
+        username: 'Carlos',
+        displayName: 'Carlos Rodríguez',
+        role: 'Médico',
+        email: 'carlos@oncoderma.com'
+      }
+    ],
+    // Credenciales legacy (mantener compatibilidad)
     credentials: {
       username: 'admin',
       password: '1234'
