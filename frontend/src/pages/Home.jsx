@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom'
-import { memo, useMemo, lazy, Suspense } from 'react'
+import { memo, useMemo } from 'react'
 import AdaptiveSVG from '../components/ui/AdaptiveSVG'
-
-// Lazy loading de componentes pesados
-const PerformanceMonitor = lazy(() => import('../components/common/PerformanceMonitor'))
 
 const Home = memo(() => {
   // Memoizar datos estáticos para evitar re-creaciones
