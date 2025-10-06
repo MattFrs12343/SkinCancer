@@ -2,30 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Enhanced Design System - Medical Dashboard Style */
+
 /* Variables CSS para tema claro (por defecto) */
 :root {
+  /* Core Colors */
   --primary: #0f172a;     /* Azul muy oscuro para texto */
   --secondary: #1e3a8a;   /* Azul médico clásico */
   --accent: #06b6d4;      /* Cian claro para acentos */
-  --background: #e2e8f0;  /* Gris muy claro de fondo */
+  --background: #f1f5f9;  /* Fondo más suave */
   --white: #ffffff;       /* Blanco puro */
+  
+  /* Gray Scale */
   --gray-50: #f8fafc;     /* Gris muy claro */
-  --gray-600: #475569;    /* Gris medio */
-  --red-600: #dc2626;     /* Rojo para errores */
-  --green-600: #059669;   /* Verde para éxito */
+  --gray-100: #f1f5f9;    /* Gris claro */
+  --gray-200: #e2e8f0;    /* Gris claro medio */
+  --gray-300: #cbd5e1;    /* Gris medio */
+  --gray-400: #94a3b8;    /* Gris medio oscuro */
+  --gray-500: #64748b;    /* Gris oscuro */
+  --gray-600: #475569;    /* Gris muy oscuro */
+  --gray-700: #334155;    /* Gris casi negro */
+  --gray-800: #1e293b;    /* Gris negro */
+  --gray-900: #0f172a;    /* Negro azulado */
+  
+  /* Medical Risk Colors */
+  --risk-high: #dc2626;
+  --risk-high-bg: rgba(220, 38, 38, 0.1);
+  --risk-high-border: rgba(220, 38, 38, 0.2);
+  --risk-medium: #f59e0b;
+  --risk-medium-bg: rgba(245, 158, 11, 0.1);
+  --risk-medium-border: rgba(245, 158, 11, 0.2);
+  --risk-low: #059669;
+  --risk-low-bg: rgba(5, 150, 105, 0.1);
+  --risk-low-border: rgba(5, 150, 105, 0.2);
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.1);
+  
+  /* Design Tokens */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
-/* Variables CSS para tema oscuro */
+/* Variables CSS para tema oscuro - Medical Dashboard Style */
 :root[data-theme='dark'] {
-  --primary: #e2e8f0;     /* Texto claro principal */
-  --secondary: #93c5fd;   /* Azul claro para subtítulos/destacar */
-  --accent: #06b6d4;      /* Mantiene el cian para acentos */
-  --background: #0f172a;  /* Fondo principal muy oscuro */
-  --white: #1e293b;       /* Blanco en dark → gris azulado oscuro */
-  --gray-50: #1e293b;     /* Fondo de componentes/cards */
-  --gray-600: #94a3b8;    /* Gris claro para textos secundarios */
-  --red-600: #f87171;     /* Rojo más suave pero brillante para alertas */
-  --green-600: #34d399;   /* Verde brillante para éxito */
+  /* Core Colors - Dashboard Style */
+  --primary: #f1f5f9;     /* Texto claro principal */
+  --secondary: #60a5fa;   /* Azul brillante para destacar */
+  --accent: #06b6d4;      /* Cian para acentos */
+  --background: #0c1220;  /* Fondo principal muy oscuro (como el dashboard) */
+  --white: #1e293b;       /* Cards y superficies */
+  
+  /* Gray Scale - Dark Theme */
+  --gray-50: #1e293b;     /* Fondo de cards */
+  --gray-100: #334155;    /* Superficies elevadas */
+  --gray-200: #475569;    /* Bordes suaves */
+  --gray-300: #64748b;    /* Bordes normales */
+  --gray-400: #94a3b8;    /* Texto secundario */
+  --gray-500: #cbd5e1;    /* Texto normal */
+  --gray-600: #e2e8f0;    /* Texto principal */
+  --gray-700: #f1f5f9;    /* Texto destacado */
+  --gray-800: #f8fafc;    /* Texto muy destacado */
+  --gray-900: #ffffff;    /* Texto máximo contraste */
+  
+  /* Medical Risk Colors - Dark Theme */
+  --risk-high: #f87171;
+  --risk-high-bg: rgba(248, 113, 113, 0.15);
+  --risk-high-border: rgba(248, 113, 113, 0.3);
+  --risk-medium: #fbbf24;
+  --risk-medium-bg: rgba(251, 191, 36, 0.15);
+  --risk-medium-border: rgba(251, 191, 36, 0.3);
+  --risk-low: #34d399;
+  --risk-low-bg: rgba(52, 211, 153, 0.15);
+  --risk-low-border: rgba(52, 211, 153, 0.3);
+  
+  /* Status Colors - Dark Theme */
+  --success: #34d399;
+  --success-bg: rgba(52, 211, 153, 0.15);
+  --warning: #fbbf24;
+  --warning-bg: rgba(251, 191, 36, 0.15);
+  --error: #f87171;
+  --error-bg: rgba(248, 113, 113, 0.15);
+  --info: #60a5fa;
+  --info-bg: rgba(96, 165, 250, 0.15);
+  
+  /* Shadows - Dark Theme */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.7);
 }
 
 @layer base {
@@ -35,89 +126,315 @@
   }
   
   body {
-    @apply bg-background text-primary;
+    background-color: var(--background);
+    color: var(--primary);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
 @layer components {
+  /* Enhanced Button System */
   .btn-primary {
-    @apply bg-secondary hover:bg-primary text-white font-medium py-2 px-4 rounded-lg transition-all duration-300;
+    background: var(--secondary);
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-primary:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
   
   .btn-secondary {
-    @apply bg-accent text-white font-medium py-2 px-4 rounded-lg transition-all duration-300;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
   }
   
   .btn-secondary:hover {
-    background-color: rgba(6, 182, 212, 0.8);
+    background: rgba(6, 182, 212, 0.8);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
   
+  /* Enhanced Input Fields */
   .input-field {
-    @apply w-full px-3 py-2 border bg-white text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300;
-    border-color: #cbd5e1;
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    transition: all 0.3s ease;
   }
   
-  :root[data-theme='dark'] .input-field {
-    border-color: #475569;
+  .input-field:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
   }
   
+  /* Enhanced Card System - Dashboard Style */
   .card {
-    @apply bg-white rounded-xl p-6 transition-all duration-300 cursor-pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
   
   .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-    border-color: rgba(6, 182, 212, 0.3);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent);
   }
   
+  /* Medical Dashboard Cards */
+  .metric-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  /* Risk Level Cards */
+  .risk-card-high {
+    background: var(--risk-high-bg);
+    border: 2px solid var(--risk-high-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+  }
+  
+  .risk-card-medium {
+    background: var(--risk-medium-bg);
+    border: 2px solid var(--risk-medium-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+  }
+  
+  .risk-card-low {
+    background: var(--risk-low-bg);
+    border: 2px solid var(--risk-low-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+  }
+  
+  /* Enhanced Typography */
+  .text-metric {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--primary);
+  }
+  
+  .text-metric-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .text-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+  }
+  
+  /* Progress Bars - Dashboard Style */
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    border-radius: var(--radius-full);
+    transition: width 1s ease-out;
+    position: relative;
+  }
+  
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  /* Status Badges */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .status-badge-success {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid var(--success);
+  }
+  
+  .status-badge-warning {
+    background: var(--warning-bg);
+    color: var(--warning);
+    border: 1px solid var(--warning);
+  }
+  
+  .status-badge-error {
+    background: var(--error-bg);
+    color: var(--error);
+    border: 1px solid var(--error);
+  }
+  
+  .status-badge-info {
+    background: var(--info-bg);
+    color: var(--info);
+    border: 1px solid var(--info);
+  }
+  
+  /* Dark Mode Enhancements - Dashboard Style */
   :root[data-theme='dark'] .card {
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    background: var(--white);
+    border-color: var(--gray-200);
+    box-shadow: var(--shadow-md);
   }
   
   :root[data-theme='dark'] .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-    border-color: rgba(6, 182, 212, 0.5);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent);
   }
   
-  /* Hover para el toggle minimalista */
-  :root[data-theme='dark'] button:hover {
-    background-color: rgba(226, 232, 240, 0.1) !important;
+  :root[data-theme='dark'] .metric-card {
+    background: var(--white);
+    border-color: var(--gray-200);
+    box-shadow: var(--shadow-md);
   }
   
-  /* Navbar específico para modo oscuro */
+  :root[data-theme='dark'] .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  :root[data-theme='dark'] .input-field {
+    background: var(--white);
+    border-color: var(--gray-300);
+    color: var(--primary);
+  }
+  
+  :root[data-theme='dark'] .input-field:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+  }
+  
+  :root[data-theme='dark'] .progress-bar {
+    background: var(--gray-200);
+  }
+  
+  :root[data-theme='dark'] .text-metric {
+    color: #ffffff !important;
+  }
+  
+  :root[data-theme='dark'] .text-metric-label {
+    color: #d1d5db !important;
+  }
+  
+  :root[data-theme='dark'] .text-section-title {
+    color: #ffffff !important;
+  }
+  
+  /* Navbar específico para modo oscuro - Dashboard Style */
   :root[data-theme='dark'] nav {
-    background-color: #0F172A !important;
+    background-color: var(--background) !important;
+    border-bottom: 1px solid var(--gray-200);
   }
   
   :root[data-theme='dark'] nav .text-primary {
-    color: #e2e8f0 !important;
+    color: var(--primary) !important;
   }
   
   :root[data-theme='dark'] nav .text-gray-600 {
-    color: #94a3b8 !important;
+    color: var(--gray-400) !important;
   }
   
   :root[data-theme='dark'] nav .text-gray-500 {
-    color: #94a3b8 !important;
+    color: var(--gray-400) !important;
   }
   
   :root[data-theme='dark'] nav .hover\\:bg-gray-50:hover {
-    background-color: rgba(226, 232, 240, 0.1) !important;
+    background-color: var(--gray-100) !important;
   }
   
-  /* Colores adaptativos para modo oscuro en sección de seguridad */
+  /* Button hover effects for dark mode */
+  :root[data-theme='dark'] button:hover {
+    background-color: var(--gray-100) !important;
+  }
+  
+  /* Enhanced Dark Mode Utilities - Dashboard Style */
+  
+  /* Background Gradients */
   :root[data-theme='dark'] .from-green-50 {
-    background: linear-gradient(to right, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.25)) !important;
+    background: linear-gradient(to right, var(--success-bg), rgba(52, 211, 153, 0.25)) !important;
   }
   
   :root[data-theme='dark'] .from-blue-50 {
-    background: linear-gradient(to right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.25)) !important;
+    background: linear-gradient(to right, var(--info-bg), rgba(96, 165, 250, 0.25)) !important;
   }
   
   :root[data-theme='dark'] .from-purple-50 {
@@ -128,105 +445,14 @@
     background: linear-gradient(to right, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.25)) !important;
   }
   
-  /* Colores adicionales para la sección de resultados confiables */
-  :root[data-theme='dark'] .bg-blue-200 {
-    background-color: rgba(59, 130, 246, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-green-200 {
-    background-color: rgba(34, 197, 94, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-purple-200 {
-    background-color: rgba(147, 51, 234, 0.3) !important;
-  }
-  
-  /* Colores adicionales para testimonios y legal */
   :root[data-theme='dark'] .from-yellow-50 {
-    background: linear-gradient(to right, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.25)) !important;
+    background: linear-gradient(to right, var(--warning-bg), rgba(251, 191, 36, 0.25)) !important;
   }
   
   :root[data-theme='dark'] .from-red-50 {
-    background: linear-gradient(to right, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.25)) !important;
+    background: linear-gradient(to right, var(--error-bg), rgba(248, 113, 113, 0.25)) !important;
   }
   
-  :root[data-theme='dark'] .border-red-200 {
-    border-color: rgba(239, 68, 68, 0.3) !important;
-  }
-  
-  /* Estilos específicos para el login rediseñado */
-  :root[data-theme='dark'] .from-blue-50 {
-    background: linear-gradient(to right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.25)) !important;
-  }
-  
-  :root[data-theme='dark'] .from-red-50 {
-    background: linear-gradient(to right, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.25)) !important;
-  }
-  
-  :root[data-theme='dark'] .border-red-200 {
-    border-color: rgba(239, 68, 68, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-white\/50 {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-  }
-  
-  /* Estilos para el toggle en modo oscuro */
-  :root[data-theme='dark'] .bg-white\/20 {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .border-white\/30 {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-  }
-  
-  /* Colores para la página Analizar en modo oscuro */
-  :root[data-theme='dark'] .bg-green-50 {
-    background-color: rgba(34, 197, 94, 0.15) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-yellow-50 {
-    background-color: rgba(245, 158, 11, 0.15) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-red-50 {
-    background-color: rgba(239, 68, 68, 0.15) !important;
-  }
-  
-  :root[data-theme='dark'] .border-green-200 {
-    border-color: rgba(34, 197, 94, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .border-yellow-200 {
-    border-color: rgba(245, 158, 11, 0.3) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-white\/50 {
-    background-color: rgba(30, 41, 59, 0.5) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-gray-50 {
-    background-color: var(--gray-50) !important;
-  }
-  
-  :root[data-theme='dark'] .bg-gray-100 {
-    background-color: rgba(30, 41, 59, 0.8) !important;
-  }
-  
-  /* Colores adicionales para FAQ */
-  :root[data-theme='dark'] .from-indigo-50 {
-    background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.25)) !important;
-  }
-  
-  :root[data-theme='dark'] .border-blue-200,
-  :root[data-theme='dark'] .border-green-200,
-  :root[data-theme='dark'] .border-purple-200,
-  :root[data-theme='dark'] .border-orange-200,
-  :root[data-theme='dark'] .border-indigo-200 {
-    border-color: rgba(148, 163, 184, 0.3) !important;
-  }
-  
-  /* Colores adicionales para la sección Qué es OncoDerma */
   :root[data-theme='dark'] .from-cyan-50 {
     background: linear-gradient(to right, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.25)) !important;
   }
@@ -235,5 +461,1852 @@
     background: linear-gradient(to right, rgba(20, 184, 166, 0.15), rgba(20, 184, 166, 0.25)) !important;
   }
   
+  :root[data-theme='dark'] .from-indigo-50 {
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.25)) !important;
+  }
+  
+  /* Background Colors */
+  :root[data-theme='dark'] .bg-green-50 {
+    background-color: var(--success-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-yellow-50 {
+    background-color: var(--warning-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-red-50 {
+    background-color: var(--error-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-blue-200 {
+    background-color: var(--info-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-green-200 {
+    background-color: var(--success-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-purple-200 {
+    background-color: rgba(147, 51, 234, 0.2) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-gray-50 {
+    background-color: var(--gray-50) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-gray-100 {
+    background-color: var(--gray-100) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-white\/50 {
+    background-color: rgba(30, 41, 59, 0.5) !important;
+  }
+  
+  :root[data-theme='dark'] .bg-white\/20 {
+    background-color: rgba(30, 41, 59, 0.3) !important;
+  }
+  
+  /* Border Colors */
+  :root[data-theme='dark'] .border-red-200 {
+    border-color: var(--error-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .border-green-200 {
+    border-color: var(--success-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .border-yellow-200 {
+    border-color: var(--warning-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .border-blue-200 {
+    border-color: var(--info-bg) !important;
+  }
+  
+  :root[data-theme='dark'] .border-purple-200,
+  :root[data-theme='dark'] .border-orange-200,
+  :root[data-theme='dark'] .border-indigo-200 {
+    border-color: var(--gray-300) !important;
+  }
+  
+  :root[data-theme='dark'] .border-white\/30 {
+    border-color: var(--gray-200) !important;
+  }
+  
 
+}
+/* Enhan
+ced Animations - Medical Dashboard Style */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulse 2s infinite;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out;
+}
+
+/* Staggered Animation Delays */
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* Medical Dashboard Specific Components */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Enhanced Hover Effects */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+/* Medical Status Indicators */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-indicator-online {
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.status-indicator-warning {
+  background: var(--warning);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.status-indicator-error {
+  background: var(--error);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+/* Glassmorphism Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+:root[data-theme='dark'] .glass-card {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Medical Chart Styles */
+.chart-container {
+  position: relative;
+  height: 200px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--gray-200);
+}
+
+.chart-legend {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.75rem;
+  color: var(--gray-600);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+  
+  .metric-card {
+    padding: var(--space-md);
+  }
+  
+  .text-metric {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .text-metric {
+    font-size: 1.75rem;
+  }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.3);
+  border-radius: var(--radius-md);
+}
+
+:root[data-theme='dark'] .focus-ring:focus {
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4);
+}
+
+/* Loading States */
+.skeleton {
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+:root[data-theme='dark'] .skeleton {
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+}/*
+ Enhanced Probability Animation Styles */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes numberCount {
+  0% {
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes circularFill {
+  0% {
+    stroke-dashoffset: 628; /* Full circle circumference for radius ~100 */
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px currentColor);
+  }
+}
+
+/* Animation Classes for Probability Components */
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-progress-pulse {
+  animation: progressPulse 2s ease-in-out infinite;
+}
+
+.animate-number-count {
+  animation: numberCount 0.8s ease-out;
+}
+
+.animate-circular-fill {
+  animation: circularFill 1.5s ease-out;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Staggered Animations for Multiple Elements */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Enhanced Hover Effects for Interactive Elements */
+.interactive-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme='dark'] .interactive-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Probability Ring Animations */
+.probability-ring {
+  transform-origin: center;
+  transition: all 0.3s ease;
+}
+
+.probability-ring:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Medical Status Indicators with Pulse */
+.medical-status-pulse {
+  position: relative;
+}
+
+.medical-status-pulse::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: inherit;
+  background: inherit;
+  opacity: 0.3;
+  animation: pulse 2s infinite;
+}
+
+/* Enhanced Focus States for Accessibility */
+.enhanced-focus:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--white),
+    0 0 0 4px var(--accent),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+:root[data-theme='dark'] .enhanced-focus:focus {
+  box-shadow: 
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--accent),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth Transitions for Theme Changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Medical Dashboard Specific Animations */
+.dashboard-metric-enter {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.dashboard-metric-enter:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-metric-enter:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-metric-enter:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-metric-enter:nth-child(4) { animation-delay: 0.4s; }
+
+/* Loading State Animations */
+.loading-pulse {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-100) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Micro-interactions */
+.micro-bounce:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.micro-lift:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+/* Medical Color Animations */
+.risk-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.risk-indicator::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.risk-indicator:hover::after {
+  left: 100%;
+}/* 
+Enhanced Dark Mode Variables - Medical Dashboard Specific */
+:root[data-theme='dark'] {
+  /* Medical Dashboard Background Hierarchy */
+  --dashboard-bg-primary: #0c1220;    /* Main background (like the reference) */
+  --dashboard-bg-secondary: #1a2332;  /* Card backgrounds */
+  --dashboard-bg-tertiary: #243447;   /* Elevated surfaces */
+  --dashboard-bg-quaternary: #2d4059; /* Interactive elements */
+  
+  /* Medical Text Hierarchy for Dark Mode */
+  --text-primary-dark: #f8fafc;       /* Primary text - highest contrast */
+  --text-secondary-dark: #e2e8f0;     /* Secondary text */
+  --text-tertiary-dark: #cbd5e1;      /* Tertiary text */
+  --text-quaternary-dark: #94a3b8;    /* Muted text */
+  --text-disabled-dark: #64748b;      /* Disabled text */
+  
+  /* Medical Accent Colors for Dark Mode */
+  --accent-primary-dark: #60a5fa;     /* Primary blue accent */
+  --accent-secondary-dark: #34d399;   /* Success green */
+  --accent-warning-dark: #fbbf24;     /* Warning yellow */
+  --accent-danger-dark: #f87171;      /* Danger red */
+  --accent-info-dark: #a78bfa;        /* Info purple */
+  
+  /* Medical Border Colors for Dark Mode */
+  --border-primary-dark: #334155;     /* Primary borders */
+  --border-secondary-dark: #475569;   /* Secondary borders */
+  --border-accent-dark: #60a5fa;      /* Accent borders */
+  
+  /* Medical Shadow System for Dark Mode */
+  --shadow-sm-dark: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md-dark: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg-dark: 0 10px 15px rgba(0, 0, 0, 0.6);
+  --shadow-xl-dark: 0 20px 25px rgba(0, 0, 0, 0.7);
+  --shadow-glow-dark: 0 0 20px rgba(96, 165, 250, 0.3);
+  
+  /* Override main variables for consistency */
+  --background: var(--dashboard-bg-primary);
+  --white: var(--dashboard-bg-secondary);
+  --gray-50: var(--dashboard-bg-secondary);
+  --gray-100: var(--dashboard-bg-tertiary);
+  --primary: var(--text-primary-dark);
+  --secondary: var(--accent-primary-dark);
+}
+
+/* Enhanced Dark Mode Component Styles */
+:root[data-theme='dark'] {
+  /* Dashboard Cards */
+  .metric-card {
+    background: var(--dashboard-bg-secondary);
+    border-color: var(--border-primary-dark);
+    box-shadow: var(--shadow-md-dark);
+  }
+  
+  .metric-card:hover {
+    background: var(--dashboard-bg-tertiary);
+    border-color: var(--accent-primary-dark);
+    box-shadow: var(--shadow-xl-dark);
+  }
+  
+  /* Glass Cards */
+  .glass-card {
+    background: rgba(26, 35, 50, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-primary-dark);
+  }
+  
+  /* Interactive Elements */
+  .btn-primary {
+    background: var(--accent-primary-dark);
+    box-shadow: var(--shadow-md-dark);
+  }
+  
+  .btn-primary:hover {
+    background: #3b82f6;
+    box-shadow: var(--shadow-lg-dark);
+  }
+  
+  .btn-secondary {
+    background: var(--dashboard-bg-tertiary);
+    color: var(--text-primary-dark);
+    border: 1px solid var(--border-secondary-dark);
+  }
+  
+  .btn-secondary:hover {
+    background: var(--dashboard-bg-quaternary);
+    border-color: var(--accent-primary-dark);
+  }
+  
+  /* Input Fields */
+  .input-field {
+    background: var(--dashboard-bg-tertiary);
+    border-color: var(--border-primary-dark);
+    color: var(--text-primary-dark);
+  }
+  
+  .input-field:focus {
+    border-color: var(--accent-primary-dark);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    background: var(--dashboard-bg-secondary);
+  }
+  
+  /* Progress Elements */
+  .progress-bar {
+    background: var(--dashboard-bg-tertiary);
+  }
+  
+  /* Status Badges */
+  .status-badge-success {
+    background: rgba(52, 211, 153, 0.2);
+    color: var(--accent-secondary-dark);
+    border-color: var(--accent-secondary-dark);
+  }
+  
+  .status-badge-warning {
+    background: rgba(251, 191, 36, 0.2);
+    color: var(--accent-warning-dark);
+    border-color: var(--accent-warning-dark);
+  }
+  
+  .status-badge-error {
+    background: rgba(248, 113, 113, 0.2);
+    color: var(--accent-danger-dark);
+    border-color: var(--accent-danger-dark);
+  }
+  
+  .status-badge-info {
+    background: rgba(167, 139, 250, 0.2);
+    color: var(--accent-info-dark);
+    border-color: var(--accent-info-dark);
+  }
+  
+  /* Risk Cards */
+  .risk-card-high {
+    background: rgba(248, 113, 113, 0.15);
+    border-color: rgba(248, 113, 113, 0.4);
+  }
+  
+  .risk-card-medium {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.4);
+  }
+  
+  .risk-card-low {
+    background: rgba(52, 211, 153, 0.15);
+    border-color: rgba(52, 211, 153, 0.4);
+  }
+  
+
+  
+
+  
+
+  
+  /* Medical Tooltips */
+  .medical-tooltip {
+    background: var(--dashboard-bg-tertiary);
+    border-color: var(--border-secondary-dark);
+    color: var(--text-primary-dark);
+    box-shadow: var(--shadow-xl-dark);
+  }
+  
+  /* Enhanced Focus States */
+  .enhanced-focus:focus {
+    box-shadow: 
+      0 0 0 2px var(--dashboard-bg-primary),
+      0 0 0 4px var(--accent-primary-dark),
+      var(--shadow-lg-dark);
+  }
+  
+  /* Skeleton Loading */
+  .skeleton {
+    background: linear-gradient(
+      90deg, 
+      var(--dashboard-bg-tertiary) 25%, 
+      var(--dashboard-bg-quaternary) 50%, 
+      var(--dashboard-bg-tertiary) 75%
+    );
+  }
+  
+  /* Chart Containers */
+  .chart-container {
+    background: var(--dashboard-bg-secondary);
+    border-color: var(--border-primary-dark);
+  }
+  
+  /* Medical Status Indicators */
+  .status-indicator-online {
+    background: var(--accent-secondary-dark);
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  }
+  
+  .status-indicator-warning {
+    background: var(--accent-warning-dark);
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+  }
+  
+  .status-indicator-error {
+    background: var(--accent-danger-dark);
+    box-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+  }
+}
+
+/* Dark Mode Specific Animations */
+:root[data-theme='dark'] {
+  .animate-glow-pulse {
+    animation: glowPulseDark 2s ease-in-out infinite;
+  }
+  
+  @keyframes glowPulseDark {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px var(--accent-primary-dark));
+    }
+    50% {
+      filter: drop-shadow(0 0 15px var(--accent-primary-dark));
+    }
+  }
+  
+  /* Hover glow effects */
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow-dark);
+  }
+  
+  /* Interactive card enhancements */
+  .interactive-card:hover {
+    box-shadow: var(--shadow-xl-dark);
+    border-color: var(--accent-primary-dark);
+  }
+}
+
+/* Dark Mode Scrollbar Styling */
+:root[data-theme='dark'] {
+  /* Webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--dashboard-bg-primary);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--dashboard-bg-tertiary);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--dashboard-bg-quaternary);
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dashboard-bg-tertiary) var(--dashboard-bg-primary);
+  }
+}
+
+/* Dark Mode Selection Styling */
+:root[data-theme='dark'] {
+  ::selection {
+    background: rgba(96, 165, 250, 0.3);
+    color: var(--text-primary-dark);
+  }
+  
+  ::-moz-selection {
+    background: rgba(96, 165, 250, 0.3);
+    color: var(--text-primary-dark);
+  }
+}
+
+/* Dark Mode Print Styles */
+@media print {
+  :root[data-theme='dark'] {
+    --dashboard-bg-primary: #ffffff;
+    --dashboard-bg-secondary: #f8fafc;
+    --text-primary-dark: #0f172a;
+    --text-secondary-dark: #334155;
+    
+    .metric-card {
+      background: white !important;
+      color: black !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+  }
+}
+
+/* Responsive Animation System */
+
+/* Base animation classes with reduced motion support */
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrance Animations */
+  .animate-entrance-fade {
+    animation: entranceFade 0.6s ease-out forwards;
+  }
+  
+  .animate-entrance-slide-up {
+    animation: entranceSlideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-entrance-slide-right {
+    animation: entranceSlideRight 0.5s ease-out forwards;
+  }
+  
+  .animate-entrance-scale {
+    animation: entranceScale 0.4s ease-out forwards;
+  }
+  
+  .animate-entrance-bounce {
+    animation: entranceBounce 0.8s ease-out forwards;
+  }
+
+  /* Medical Dashboard Specific Animations */
+  .animate-metric-reveal {
+    animation: metricReveal 1s ease-out forwards;
+  }
+  
+  .animate-progress-fill {
+    animation: progressFill 1.2s ease-out forwards;
+  }
+  
+  .animate-card-stack {
+    animation: cardStack 0.8s ease-out forwards;
+  }
+  
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .animate-medical-pulse {
+    animation: medicalPulse 1.5s ease-in-out infinite;
+  }
+
+  /* Staggered Animation Delays */
+  .animate-stagger-1 { animation-delay: 0.1s; }
+  .animate-stagger-2 { animation-delay: 0.2s; }
+  .animate-stagger-3 { animation-delay: 0.3s; }
+  .animate-stagger-4 { animation-delay: 0.4s; }
+  .animate-stagger-5 { animation-delay: 0.5s; }
+  .animate-stagger-6 { animation-delay: 0.6s; }
+}
+
+/* Keyframe Definitions */
+@keyframes entranceFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes entranceSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes entranceSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes entranceScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes entranceBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes metricReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes progressFill {
+  0% {
+    width: 0%;
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes cardStack {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) rotateX(15deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) rotateX(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes medicalPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Responsive Animation Adjustments */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .animate-entrance-slide-up {
+    animation-duration: 0.4s;
+  }
+  
+  .animate-entrance-scale {
+    animation-duration: 0.3s;
+  }
+  
+  .animate-metric-reveal {
+    animation-duration: 0.6s;
+  }
+  
+  /* Disable complex animations on mobile for performance */
+  .animate-card-stack {
+    animation: entranceSlideUp 0.4s ease-out forwards;
+  }
+  
+  .animate-glow-pulse {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce animations on small screens */
+  .animate-entrance-bounce {
+    animation: entranceSlideUp 0.3s ease-out forwards;
+  }
+  
+  .animate-medical-pulse {
+    animation: none;
+  }
+}
+
+/* High performance mode for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-glow-pulse,
+  .animate-medical-pulse,
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* Micro-interaction Classes */
+.micro-hover-lift {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.micro-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.micro-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.micro-hover-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.micro-click-bounce {
+  transition: transform 0.1s ease;
+}
+
+.micro-click-bounce:active {
+  transform: scale(0.98);
+}
+
+.micro-hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.micro-hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Loading State Animations */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-100) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.5s infinite;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Medical Dashboard Loading States */
+.medical-loading-pulse {
+  animation: medicalLoadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes medicalLoadingPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Interactive Element States */
+.interactive-element {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px);
+}
+
+.interactive-element:active {
+  transform: translateY(0);
+}
+
+.interactive-element:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Medical Status Animations */
+.status-online {
+  animation: statusOnline 2s ease-in-out infinite;
+}
+
+.status-warning {
+  animation: statusWarning 1s ease-in-out infinite;
+}
+
+.status-error {
+  animation: statusError 0.5s ease-in-out infinite;
+}
+
+@keyframes statusOnline {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes statusWarning {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes statusError {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+/* Progress Animation Enhancements */
+.progress-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-animated::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progressShimmer 2s infinite;
+}
+
+@keyframes progressShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Chart Animation Classes */
+.chart-animate-in {
+  animation: chartAnimateIn 1s ease-out forwards;
+}
+
+@keyframes chartAnimateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Notification Animations */
+.notification-slide-in {
+  animation: notificationSlideIn 0.3s ease-out forwards;
+}
+
+.notification-slide-out {
+  animation: notificationSlideOut 0.3s ease-in forwards;
+}
+
+@keyframes notificationSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .respect-motion-preference {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Dark Mode Animation Adjustments */
+:root[data-theme='dark'] {
+  .loading-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--dashboard-bg-tertiary) 25%,
+      var(--dashboard-bg-quaternary) 50%,
+      var(--dashboard-bg-tertiary) 75%
+    );
+  }
+  
+  .micro-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+  }
+  
+  .interactive-element:focus {
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4);
+  }
+}/* Fin
+al Visual Polish and Micro-interactions */
+
+/* Enhanced Medical Dashboard Polish */
+.medical-dashboard-polish {
+  /* Subtle texture overlay */
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+:root[data-theme='dark'] .medical-dashboard-polish {
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+}
+
+/* Enhanced Card Interactions */
+.enhanced-card-interaction {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-card-interaction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.enhanced-card-interaction:hover::before {
+  left: 100%;
+}
+
+:root[data-theme='dark'] .enhanced-card-interaction::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+}
+
+/* Medical Status Pulse Effects */
+.medical-status-pulse-success {
+  animation: medicalPulseSuccess 2s ease-in-out infinite;
+}
+
+.medical-status-pulse-warning {
+  animation: medicalPulseWarning 1.5s ease-in-out infinite;
+}
+
+.medical-status-pulse-error {
+  animation: medicalPulseError 1s ease-in-out infinite;
+}
+
+@keyframes medicalPulseSuccess {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes medicalPulseWarning {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes medicalPulseError {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Enhanced Button Micro-interactions */
+.btn-medical-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-medical-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-medical-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-medical-primary:hover::before {
+  left: 100%;
+}
+
+.btn-medical-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced Progress Animations */
+.progress-medical-enhanced {
+  position: relative;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-medical-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 50px 50px;
+  animation: progressStripes 1s linear infinite;
+}
+
+@keyframes progressStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+/* Medical Tooltip Enhancements */
+.medical-tooltip-enhanced {
+  position: relative;
+  background: var(--dashboard-bg-tertiary);
+  border: 1px solid var(--border-primary-dark);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl-dark);
+  backdrop-filter: blur(10px);
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Enhanced Focus Indicators */
+.focus-medical-enhanced:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--white),
+    0 0 0 4px var(--accent-primary-dark),
+    0 0 20px rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-md);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Medical Data Visualization Enhancements */
+.data-viz-medical {
+  position: relative;
+}
+
+.data-viz-medical::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--accent-primary-dark), 
+    var(--accent-secondary-dark), 
+    var(--accent-primary-dark)
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.data-viz-medical:hover::before {
+  opacity: 0.3;
+}
+
+/* Enhanced Loading States */
+.loading-medical-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--dashboard-bg-secondary) 25%,
+    var(--dashboard-bg-tertiary) 50%,
+    var(--dashboard-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: medicalSkeletonLoading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes medicalSkeletonLoading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Medical Chart Enhancements */
+.chart-medical-enhanced {
+  position: relative;
+  background: var(--dashboard-bg-secondary);
+  border: 1px solid var(--border-primary-dark);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.chart-medical-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-primary-dark),
+    transparent
+  );
+}
+
+/* Enhanced Notification Styles */
+.notification-medical {
+  background: var(--dashboard-bg-secondary);
+  border: 1px solid var(--border-secondary-dark);
+  border-left: 4px solid var(--accent-primary-dark);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg-dark);
+  backdrop-filter: blur(10px);
+  animation: notificationSlideInMedical 0.3s ease-out;
+}
+
+@keyframes notificationSlideInMedical {
+  from {
+    transform: translateX(100%) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Medical Form Enhancements */
+.form-medical-enhanced .input-field {
+  position: relative;
+  background: var(--dashboard-bg-secondary);
+  border: 2px solid var(--border-primary-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-medical-enhanced .input-field:focus {
+  border-color: var(--accent-primary-dark);
+  box-shadow: 
+    0 0 0 3px rgba(96, 165, 250, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Enhanced Medical Icons */
+.icon-medical-enhanced {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.icon-medical-enhanced:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Medical Dashboard Grid Enhancements */
+.dashboard-grid-medical {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.dashboard-grid-medical > * {
+  animation: dashboardItemFadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.dashboard-grid-medical > *:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-grid-medical > *:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-grid-medical > *:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-grid-medical > *:nth-child(4) { animation-delay: 0.4s; }
+.dashboard-grid-medical > *:nth-child(5) { animation-delay: 0.5s; }
+.dashboard-grid-medical > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes dashboardItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced Medical Badges */
+.badge-medical-enhanced {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.badge-medical-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.badge-medical-enhanced:hover {
+  transform: scale(1.05);
+}
+
+.badge-medical-enhanced:hover::before {
+  left: 100%;
+}
+
+/* Medical Success States */
+.success-medical-enhanced {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.warning-medical-enhanced {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.error-medical-enhanced {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid var(--error);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+/* Final Polish Utilities */
+.medical-glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+:root[data-theme='dark'] .medical-glass-effect {
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.medical-gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary-dark), var(--accent-secondary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.medical-shadow-glow {
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+:root[data-theme='dark'] .medical-shadow-glow {
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(96, 165, 250, 0.3);
+}
+
+/* Print Optimizations */
+@media print {
+  .medical-dashboard-polish,
+  .enhanced-card-interaction::before,
+  .btn-medical-primary::before,
+  .progress-medical-enhanced::after {
+    display: none !important;
+  }
+  
+  .metric-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .dashboard-grid-medical {
+    display: block !important;
+  }
+  
+  .dashboard-grid-medical > * {
+    margin-bottom: 1rem !important;
+    animation: none !important;
+  }
+}/* Enhanc
+ed Dark Mode Text Visibility - Specific Fixes */
+:root[data-theme='dark'] {
+  /* Ensure all primary headings are white in dark mode */
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+  
+  /* Specific fixes for medical dashboard text */
+  .text-section-title,
+  .text-metric,
+  .metric-card h3,
+  .metric-card h4,
+  .metric-card h5 {
+    color: #ffffff !important;
+  }
+  
+  /* Ensure primary text is white */
+  .text-primary {
+    color: #ffffff !important;
+  }
+  
+  /* Secondary text should be light gray */
+  .text-metric-label,
+  .text-secondary {
+    color: #d1d5db !important;
+  }
+  
+  /* Ensure card titles are white */
+  .card h1,
+  .card h2,
+  .card h3,
+  .card h4,
+  .card h5,
+  .card h6 {
+    color: #ffffff !important;
+  }
+  
+  /* Medical dashboard specific text */
+  .dashboard-title,
+  .section-title,
+  .card-title {
+    color: #ffffff !important;
+  }
 }
