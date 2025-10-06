@@ -139,4 +139,3 @@ htmlcov/
 *.db
 *.sqlite
 *.sqlite3
-.vercel
