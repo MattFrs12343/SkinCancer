@@ -88,3 +88,108 @@ export const useExpensiveCalculation = (calculation, dependencies) => {
     return calculation()
   }, dependencies)
 }
+
+/**
+ * Hook para caché persistente con expiración
+ */
+export const usePersistentCache = (key, defaultValue, ttl = 5 * 60 * 1000) => {
+  const [value, setValue] = useState(() => {
+    try {
+      const cached = localStorage.getItem(key)
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached)
+        if (Date.now() - timestamp < ttl) {
+          return data
+        }
+        localStorage.removeItem(key)
+      }
+    } catch (error) {
+      console.warn('Error reading from cache:', error)
+    }
+    return defaultValue
+  })
+
+  const setCachedValue = useCallback((newValue) => {
+    try {
+      const cacheData = {
+        data: newValue,
+        timestamp: Date.now()
+      }
+      localStorage.setItem(key, JSON.stringify(cacheData))
+      setValue(newValue)
+    } catch (error) {
+      console.warn('Error writing to cache:', error)
+      setValue(newValue)
+    }
+  }, [key])
+
+  const clearCache = useCallback(() => {
+    localStorage.removeItem(key)
+    setValue(defaultValue)
+  }, [key, defaultValue])
+
+  return [value, setCachedValue, clearCache]
+}
+
+/**
+ * Hook para batch de actualizaciones de estado
+ */
+export const useBatchedState = (initialState) => {
+  const [state, setState] = useState(initialState)
+  const batchedUpdates = useRef([])
+  const timeoutRef = useRef()
+
+  const batchUpdate = useCallback((update) => {
+    batchedUpdates.current.push(update)
+    
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setState(prevState => {
+        let newState = prevState
+        batchedUpdates.current.forEach(update => {
+          newState = typeof update === 'function' ? update(newState) : { ...newState, ...update }
+        })
+        batchedUpdates.current = []
+        return newState
+      })
+    }, 0)
+  }, [])
+
+  return [state, batchUpdate]
+}
+
+/**
+ * Hook para optimizar listas grandes con virtualización
+ */
+export const useVirtualizedList = (items, itemHeight, containerHeight) => {
+  const [scrollTop, setScrollTop] = useState(0)
+  
+  const visibleItems = useMemo(() => {
+    const startIndex = Math.floor(scrollTop / itemHeight)
+    const endIndex = Math.min(
+      startIndex + Math.ceil(containerHeight / itemHeight) + 1,
+      items.length
+    )
+    
+    return {
+      startIndex,
+      endIndex,
+      items: items.slice(startIndex, endIndex),
+      totalHeight: items.length * itemHeight,
+      offsetY: startIndex * itemHeight
+    }
+  }, [items, itemHeight, containerHeight, scrollTop])
+
+  const handleScroll = useCallback((e) => {
+    setScrollTop(e.target.scrollTop)
+  }, [])
+
+  return {
+    visibleItems,
+    handleScroll,
+    totalHeight: visibleItems.totalHeight
+  }
+}

@@ -2310,3 +2310,64 @@ ed Dark Mode Text Visibility - Specific Fixes */
     color: #ffffff !important;
   }
 }
+/* OPT
+IMIZACIÓN DE PERFORMANCE - TOGGLE DE TEMA RÁPIDO */
+
+/* Deshabilitar transiciones globales que causan lentitud */
+* {
+  transition: none !important;
+}
+
+/* Habilitar transiciones solo para elementos específicos que las necesitan */
+.btn-primary,
+.btn-secondary,
+.metric-card,
+.card,
+.input-field,
+.interactive-element,
+.micro-hover-lift,
+.micro-hover-glow,
+.enhanced-card-interaction {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Transiciones específicas para hover effects */
+.hover-lift:hover,
+.micro-hover-lift:hover {
+  transition: transform 0.15s ease !important;
+}
+
+/* Transiciones para elementos de UI críticos */
+.progress-fill,
+.status-badge,
+.notification-slide-in {
+  transition: all 0.2s ease !important;
+}
+
+/* Transiciones rápidas para el cambio de tema en elementos específicos */
+html,
+body {
+  transition: background-color 0.1s ease, color 0.1s ease !important;
+}
+
+/* Clase para deshabilitar completamente las transiciones durante el cambio de tema */
+.theme-transitioning * {
+  transition: none !important;
+  animation-duration: 0s !important;
+}
+
+/* Optimización para dispositivos de gama baja */
+@media (max-width: 768px) {
+  * {
+    transition: none !important;
+    animation-duration: 0.1s !important;
+  }
+}
+
+/* Respetar preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

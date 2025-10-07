@@ -1,6 +1,8 @@
 import { useState, useCallback, useRef } from 'react'
 import { analysisService } from '../services/analysisService'
 import { ERROR_MESSAGES } from '../utils/constants'
+import { useAPICache } from '../utils/apiCache'
+import { compressImage } from '../utils/optimization'
 
 export const useImageAnalysis = () => {
   // Estados simples y confiables
@@ -13,6 +15,18 @@ export const useImageAnalysis = () => {
   // Referencias para evitar re-creaciones
   const progressIntervalRef = useRef(null)
   const abortControllerRef = useRef(null)
+  const fileHashRef = useRef(null)
+
+  // Hook de caché
+  const cache = useAPICache()
+
+  // Generar hash simple del archivo para caché
+  const generateFileHash = useCallback(async (file) => {
+    const buffer = await file.arrayBuffer()
+    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+  }, [])
 
   // Verificar conectividad
   const checkConnectivity = useCallback(async () => {
@@ -32,6 +46,24 @@ export const useImageAnalysis = () => {
       return { success: false, message: 'No hay archivo' }
     }
 
+    // Generar hash del archivo para caché
+    const fileHash = await generateFileHash(file)
+    fileHashRef.current = fileHash
+
+    // Verificar si ya tenemos este resultado en caché
+    const cachedResult = cache.get(`analysis:${fileHash}`)
+    if (cachedResult) {
+      console.log('Usando resultado desde caché')
+      setResult(cachedResult)
+      setError(null)
+      setProgress(100)
+      return {
+        success: true,
+        result: cachedResult,
+        fromCache: true
+      }
+    }
+
     // Cancelar análisis anterior si existe
     if (abortControllerRef.current) {
       abortControllerRef.current.abort()
@@ -47,6 +79,9 @@ export const useImageAnalysis = () => {
     const isOnline = await checkConnectivity()
 
     try {
+      // Comprimir imagen antes del análisis para mejor performance
+      const compressedFile = await compressImage(file, 1024, 0.8)
+      console.log(`Imagen comprimida: ${file.size} -> ${compressedFile.size} bytes`)
       // Simular progreso durante el análisis
       progressIntervalRef.current = setInterval(() => {
         setProgress(prev => {
@@ -56,7 +91,7 @@ export const useImageAnalysis = () => {
       }, 300)
 
       console.log('Iniciando análisis de imagen...')
-      const analysisResult = await analysisService.analyzeImage(file, {
+      const analysisResult = await analysisService.analyzeImage(compressedFile, {
         signal: abortControllerRef.current.signal
       })
 
@@ -66,6 +101,9 @@ export const useImageAnalysis = () => {
       setProgress(100)
 
       if (analysisResult.success) {
+        // Guardar resultado en caché por 30 minutos
+        cache.set(`analysis:${fileHash}`, analysisResult, 30 * 60 * 1000)
+        
         setResult(analysisResult)
         setError(null)
         
@@ -74,7 +112,8 @@ export const useImageAnalysis = () => {
         return {
           success: true,
           result: analysisResult,
-          isSimulated: analysisResult.isSimulated || false
+          isSimulated: analysisResult.isSimulated || false,
+          fromCache: false
         }
       } else {
         const errorMessage = analysisResult.error 

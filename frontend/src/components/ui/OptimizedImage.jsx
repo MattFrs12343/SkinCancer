@@ -1,166 +1,198 @@
-import { useState, useCallback, useMemo, memo } from 'react'
+import { memo, forwardRef } from 'react'
+import { useOptimizedImage } from '../../hooks/useOptimizedImage'
 
 /**
- * Componente de imagen optimizado con lazy loading y compresión
+ * Componente de imagen optimizado con lazy loading, compresión y fallbacks
  */
-const OptimizedImage = memo(({ 
-  src, 
-  alt, 
-  className = '', 
-  width, 
-  height, 
-  quality = 80,
-  loading = 'lazy',
-  onLoad,
-  onError,
+const OptimizedImage = memo(forwardRef(({
+  src,
+  alt = '',
+  className = '',
+  lazy = true,
+  quality = 0.8,
+  maxWidth = 1024,
+  placeholder = null,
   fallback = null,
-  ...props 
-}) => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [hasError, setHasError] = useState(false)
+  onLoad = null,
+  onError = null,
+  ...props
+}, ref) => {
+  const {
+    imageSrc,
+    isLoading,
+    hasError,
+    imgRef,
+    reload
+  } = useOptimizedImage(src, {
+    lazy,
+    quality,
+    maxWidth,
+    placeholder,
+    onLoad,
+    onError
+  })
 
-  // Generar srcSet para diferentes densidades de pantalla
-  const srcSet = useMemo(() => {
-    if (!src) return ''
-    
-    const baseSrc = src.split('.').slice(0, -1).join('.')
-    const extension = src.split('.').pop()
-    
-    return [
-      `${src} 1x`,
-      `${baseSrc}@2x.${extension} 2x`,
-      `${baseSrc}@3x.${extension} 3x`
-    ].join(', ')
-  }, [src])
-
-  // Optimizar URL de imagen con parámetros de calidad
-  const optimizedSrc = useMemo(() => {
-    if (!src) return ''
-    
-    // Si es una URL externa, agregar parámetros de optimización
-    if (src.startsWith('http')) {
-      const url = new URL(src)
-      url.searchParams.set('q', quality)
-      if (width) url.searchParams.set('w', width)
-      if (height) url.searchParams.set('h', height)
-      return url.toString()
+  // Combinar refs
+  const combinedRef = (node) => {
+    imgRef.current = node
+    if (ref) {
+      if (typeof ref === 'function') {
+        ref(node)
+      } else {
+        ref.current = node
+      }
     }
-    
-    return src
-  }, [src, quality, width, height])
+  }
 
-  const handleLoad = useCallback((e) => {
-    setIsLoaded(true)
-    setHasError(false)
-    onLoad?.(e)
-  }, [onLoad])
+  // Mostrar placeholder mientras carga
+  if (isLoading && placeholder) {
+    return (
+      <div 
+        className={`${className} animate-pulse bg-gray-200 dark:bg-gray-700 flex items-center justify-center`}
+        {...props}
+      >
+        {typeof placeholder === 'string' ? (
+          <span className="text-gray-400 text-sm">{placeholder}</span>
+        ) : (
+          placeholder
+        )}
+      </div>
+    )
+  }
 
-  const handleError = useCallback((e) => {
-    setHasError(true)
-    setIsLoaded(false)
-    onError?.(e)
-  }, [onError])
-
-  // Mostrar fallback si hay error
+  // Mostrar fallback en caso de error
   if (hasError && fallback) {
-    return fallback
+    return (
+      <div 
+        className={`${className} bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-600`}
+        {...props}
+      >
+        {typeof fallback === 'string' ? (
+          <div className="text-center p-4">
+            <div className="text-gray-400 mb-2">⚠️</div>
+            <span className="text-gray-500 text-sm">{fallback}</span>
+            <button 
+              onClick={reload}
+              className="block mt-2 text-xs text-blue-500 hover:text-blue-700 underline"
+            >
+              Reintentar
+            </button>
+          </div>
+        ) : (
+          fallback
+        )}
+      </div>
+    )
   }
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {/* Placeholder mientras carga */}
-      {!isLoaded && (
-        <div 
-          className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center"
-          style={{ width, height }}
-        >
-          <svg 
-            className="w-8 h-8 text-gray-400" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
-            />
-          </svg>
-        </div>
-      )}
-      
-      {/* Imagen optimizada */}
-      <img
-        src={optimizedSrc}
-        srcSet={srcSet}
-        alt={alt}
-        width={width}
-        height={height}
-        loading={loading}
-        onLoad={handleLoad}
-        onError={handleError}
-        className={`transition-opacity duration-300 ${
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        {...props}
-      />
-    </div>
+    <img
+      ref={combinedRef}
+      src={imageSrc}
+      alt={alt}
+      className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+      loading={lazy ? 'lazy' : 'eager'}
+      decoding="async"
+      {...props}
+      onLoad={(e) => {
+        onLoad?.(e)
+      }}
+      onError={(e) => {
+        onError?.(e)
+      }}
+    />
   )
-})
+}))
 
 OptimizedImage.displayName = 'OptimizedImage'
 
-export default OptimizedImage
+/**
+ * Componente de imagen con skeleton loader
+ */
+export const ImageWithSkeleton = memo(({ 
+  src, 
+  alt, 
+  className = '',
+  skeletonClassName = '',
+  ...props 
+}) => {
+  return (
+    <OptimizedImage
+      src={src}
+      alt={alt}
+      className={className}
+      placeholder={
+        <div className={`animate-pulse bg-gray-200 dark:bg-gray-700 rounded ${skeletonClassName}`}>
+          <div className="flex items-center justify-center h-full">
+            <svg 
+              className="w-8 h-8 text-gray-400" 
+              fill="currentColor" 
+              viewBox="0 0 20 20"
+            >
+              <path 
+                fillRule="evenodd" 
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" 
+                clipRule="evenodd" 
+              />
+            </svg>
+          </div>
+        </div>
+      }
+      fallback="Error al cargar imagen"
+      {...props}
+    />
+  )
+})
+
+ImageWithSkeleton.displayName = 'ImageWithSkeleton'
 
 /**
- * Hook para optimización de imágenes
+ * Componente de avatar optimizado
  */
-export const useImageOptimization = () => {
-  // Comprimir imagen antes de subirla
-  const compressImage = useCallback((file, maxWidth = 1024, quality = 0.8) => {
-    return new Promise((resolve) => {
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      const img = new Image()
-      
-      img.onload = () => {
-        // Calcular nuevas dimensiones manteniendo aspect ratio
-        const ratio = Math.min(maxWidth / img.width, maxWidth / img.height)
-        canvas.width = img.width * ratio
-        canvas.height = img.height * ratio
-        
-        // Dibujar imagen redimensionada
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-        
-        // Convertir a blob comprimido
-        canvas.toBlob(resolve, 'image/jpeg', quality)
-      }
-      
-      img.src = URL.createObjectURL(file)
-    })
-  }, [])
-
-  // Generar thumbnail
-  const generateThumbnail = useCallback((file, size = 150) => {
-    return compressImage(file, size, 0.7)
-  }, [compressImage])
-
-  // Validar tipo de imagen
-  const validateImageType = useCallback((file) => {
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
-    return validTypes.includes(file.type)
-  }, [])
-
-  // Validar tamaño de imagen
-  const validateImageSize = useCallback((file, maxSizeMB = 10) => {
-    return file.size <= maxSizeMB * 1024 * 1024
-  }, [])
-
-  return {
-    compressImage,
-    generateThumbnail,
-    validateImageType,
-    validateImageSize
+export const OptimizedAvatar = memo(({ 
+  src, 
+  alt, 
+  size = 'md',
+  fallbackText = '',
+  className = '',
+  ...props 
+}) => {
+  const sizeClasses = {
+    sm: 'w-8 h-8 text-xs',
+    md: 'w-12 h-12 text-sm',
+    lg: 'w-16 h-16 text-base',
+    xl: 'w-24 h-24 text-lg'
   }
-}
+
+  const initials = fallbackText
+    .split(' ')
+    .map(word => word.charAt(0))
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+
+  return (
+    <OptimizedImage
+      src={src}
+      alt={alt}
+      className={`${sizeClasses[size]} rounded-full object-cover ${className}`}
+      quality={0.9}
+      maxWidth={200}
+      placeholder={
+        <div className={`${sizeClasses[size]} rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold`}>
+          {initials || '?'}
+        </div>
+      }
+      fallback={
+        <div className={`${sizeClasses[size]} rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-300 font-semibold`}>
+          {initials || '?'}
+        </div>
+      }
+      {...props}
+    />
+  )
+})
+
+OptimizedAvatar.displayName = 'OptimizedAvatar'
+
+export default OptimizedImage

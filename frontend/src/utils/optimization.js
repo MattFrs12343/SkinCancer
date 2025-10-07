@@ -278,21 +278,48 @@ export const monitorMemoryUsage = (callback) => {
  * Inicializar todas las optimizaciones
  */
 export const initializeOptimizations = () => {
-  console.log('Initializing performance optimizations...')
+  console.log('🚀 Initializing performance optimizations...')
   
   // Aplicar configuración adaptativa
   const config = getAdaptiveConfig()
   window.__adaptiveConfig = config
   
-  // Inicializar optimizaciones
+  // Inicializar optimizaciones básicas
   preloadCriticalResources()
   optimizeWebVitals()
   lazyLoadImages()
   
   // Configurar monitor de memoria
   const stopMemoryMonitor = monitorMemoryUsage((usage) => {
-    console.log('Memory usage:', usage)
+    console.log('💾 Memory usage:', usage)
   })
+  
+  // Inicializar monitor de performance si está en desarrollo
+  if (process.env.NODE_ENV === 'development') {
+    import('./performanceMonitor.js').then(({ default: performanceMonitor }) => {
+      performanceMonitor.setEnabled(true)
+      console.log('📊 Performance monitoring enabled')
+      
+      // Log reporte cada 30 segundos en desarrollo
+      setInterval(() => {
+        const report = performanceMonitor.getPerformanceReport()
+        if (report.score < 80) {
+          console.warn('⚠️ Performance score below 80:', report.score)
+        }
+      }, 30000)
+    })
+  }
+  
+  // Optimizaciones específicas para dispositivos de gama baja
+  if (config.aggressiveLazyLoading) {
+    console.log('📱 Low-end device detected, applying aggressive optimizations')
+    
+    // Reducir calidad de imágenes
+    document.documentElement.style.setProperty('--image-quality', '0.6')
+    
+    // Deshabilitar animaciones complejas
+    document.documentElement.style.setProperty('--animation-duration', '0.1s')
+  }
   
   // Cleanup al descargar la página
   window.addEventListener('beforeunload', () => {
@@ -300,5 +327,12 @@ export const initializeOptimizations = () => {
     cleanupResources()
   })
   
-  console.log('Performance optimizations initialized with config:', config)
+  // Configurar service worker si está disponible
+  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('🔧 Service Worker registered'))
+      .catch(err => console.warn('Service Worker registration failed:', err))
+  }
+  
+  console.log('✅ Performance optimizations initialized with config:', config)
 }
