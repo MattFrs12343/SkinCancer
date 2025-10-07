@@ -105,25 +105,8 @@ export default defineConfig({
   // Configuración de CSS optimizada
   css: {
     devSourcemap: false,
-    postcss: {
-      plugins: [
-        // Optimización adicional de CSS
-        require('autoprefixer'),
-      ]
-    }
   },
   
   // Configuración de caché para desarrollo
   cacheDir: 'node_modules/.vite',
-  
-  // Configuración experimental para mejor performance
-  experimental: {
-    renderBuiltUrl(filename, { hostType }) {
-      if (hostType === 'js') {
-        return { js: `/${filename}` }
-      } else {
-        return { relative: true }
-      }
-    }
-  },
 })
