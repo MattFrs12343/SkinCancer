@@ -5,7 +5,7 @@ import ConnectionStatus from '../components/common/ConnectionStatus'
 import ResultsHeader from '../components/ui/ResultsHeader'
 import PrimaryResultCard from '../components/ui/PrimaryResultCard'
 import EnhancedDetailedAnalysis from '../components/ui/EnhancedDetailedAnalysis'
-import SmartRecommendationsSystem from '../components/ui/SmartRecommendationsSystem'
+
 import { EntranceAnimation, StaggeredAnimation } from '../components/ui/AnimationSystem'
 import { ResponsiveContainer } from '../components/ui/ResponsiveSystem'
 import { AccessibilityProvider } from '../components/ui/AccessibilitySystem'
@@ -173,7 +173,7 @@ const Analizar = () => {
                       <h3 className="font-semibold text-primary dark:text-white">Resultados</h3>
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                      Visualización profesional de resultados y recomendaciones
+                      Visualización profesional de resultados del análisis
                     </p>
                     {result && (
                       <div className="flex items-center text-sm text-blue-600 dark:text-blue-400 font-medium">
@@ -275,20 +275,7 @@ const Analizar = () => {
                 <EnhancedDetailedAnalysis analysisResult={result} />
               </EntranceAnimation>
 
-              {/* Smart Recommendations */}
-              <EntranceAnimation type="fadeInUp" delay={600}>
-                <SmartRecommendationsSystem
-                  analysisResult={result}
-                  onScheduleAppointment={() => {
-                    // Implementar funcionalidad de programar cita
-                    console.log('Programar cita médica')
-                  }}
-                  onSaveReport={() => {
-                    // Implementar funcionalidad de guardar reporte
-                    console.log('Guardar reporte médico')
-                  }}
-                />
-              </EntranceAnimation>
+
             </div>
           )}
 
