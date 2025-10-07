@@ -283,6 +283,10 @@ const Analizar = () => {
                     // Implementar funcionalidad de programar cita
                     console.log('Programar cita médica')
                   }}
+                  onSaveReport={() => {
+                    // Implementar funcionalidad de guardar reporte
+                    console.log('Guardar reporte médico')
+                  }}
                 />
               </EntranceAnimation>
             </div>
