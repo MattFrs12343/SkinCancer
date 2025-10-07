@@ -2,7 +2,7 @@ import { memo, lazy, Suspense, useMemo, useCallback, useState, useEffect } from 
 
 // Lazy loading de componentes pesados
 export const LazyEnhancedDetailedAnalysis = lazy(() => import('./EnhancedDetailedAnalysis'))
-export const LazySmartRecommendationsSystem = lazy(() => import('./SmartRecommendationsSystem'))
+
 export const LazyAnimationSystem = lazy(() => import('./AnimationSystem'))
 
 // Componente de loading optimizado
@@ -345,7 +345,6 @@ PerformanceWrapper.displayName = 'PerformanceWrapper'
 
 export default {
   LazyEnhancedDetailedAnalysis,
-  LazySmartRecommendationsSystem,
   LazyAnimationSystem,
   OptimizedLoader,
   useOptimizedState,

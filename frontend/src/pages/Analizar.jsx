@@ -5,7 +5,7 @@ import ConnectionStatus from '../components/common/ConnectionStatus'
 import ResultsHeader from '../components/ui/ResultsHeader'
 import PrimaryResultCard from '../components/ui/PrimaryResultCard'
 import EnhancedDetailedAnalysis from '../components/ui/EnhancedDetailedAnalysis'
-import SmartRecommendationsSystem from '../components/ui/SmartRecommendationsSystem'
+
 import { EntranceAnimation, StaggeredAnimation } from '../components/ui/AnimationSystem'
 import { ResponsiveContainer } from '../components/ui/ResponsiveSystem'
 import { AccessibilityProvider } from '../components/ui/AccessibilitySystem'
@@ -275,16 +275,7 @@ const Analizar = () => {
                 <EnhancedDetailedAnalysis analysisResult={result} />
               </EntranceAnimation>
 
-              {/* Smart Recommendations */}
-              <EntranceAnimation type="fadeInUp" delay={600}>
-                <SmartRecommendationsSystem
-                  analysisResult={result}
-                  onScheduleAppointment={() => {
-                    // Implementar funcionalidad de programar cita
-                    console.log('Programar cita médica')
-                  }}
-                />
-              </EntranceAnimation>
+
             </div>
           )}
 
