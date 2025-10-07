@@ -137,8 +137,7 @@ def get_cors_config(environment: str = "development") -> dict:
     if environment == "production":
         return {
             "allow_origins": [
-                "https://oncoderma.vercel.app",
-                "https://oncoderma.netlify.app",
+                "http://localhost:3000",
                 "https://www.oncoderma.com"
             ],
             "allow_credentials": True,

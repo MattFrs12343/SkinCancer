@@ -78,10 +78,10 @@ OncoDerma es una aplicación web moderna que aprovecha la inteligencia artificia
 
 ### 📊 **Monitoreo y CI/CD**
 
-- GitHub Actions para integración continua
-- Deploy automático en commits a master
-- Triggers automáticos en cada commit
-- Validación de código y tests automatizados
+- Desarrollo local optimizado
+- Hot reload para cambios instantáneos
+- Validación de código con ESLint
+- Build optimizado para producción
 
 ## 🛠️ Stack Tecnológico Completo
 
@@ -113,22 +113,16 @@ OncoDerma es una aplicación web moderna que aprovecha la inteligencia artificia
 - **Git** - Control de versiones
 - **GitHub Actions** - CI/CD automatizado
 
-### 🚀 **DevOps y Deploy**
+### 🔧 **Herramientas de Desarrollo**
 
-- **GitHub Actions** - Pipelines de CI/CD
-- **Docker** - Containerización (configurado)
-- **Vercel/Netlify** - Deploy de frontend (configurado)
-- **Render** - Deploy de backend (configurado)
+- **Vite** - Build tool y dev server optimizado
+- **Hot Module Replacement** - Desarrollo en tiempo real
 
 ## 📁 Estructura Detallada del Proyecto
 
 ```
 oncoderma/
-├── 📁 .github/                    # GitHub Actions y workflows
-│   └── workflows/
-│       ├── ci-cd.yml             # Pipeline principal CI/CD
-│       ├── commit-trigger.yml    # Trigger en cada commit
-│       └── auto-deploy.yml       # Deploy automático
+
 ├── 📁 frontend/                   # Aplicación React
 │   ├── 📁 src/
 │   │   ├── 📁 components/        # Componentes React
@@ -179,10 +173,7 @@ oncoderma/
 ├── 📁 scripts/                  # Scripts de utilidad
 ├── 📄 README.md                 # Documentación principal
 ├── 📄 .env.example              # Variables de entorno ejemplo
-├── 📄 docker-compose.yml        # Configuración Docker
-├── 📄 netlify.toml              # Configuración Netlify
-├── 📄 vercel.json               # Configuración Vercel
-└── 📄 render.yaml               # Configuración Render
+
 ```
 
 ## 🚀 Instalación y Configuración Completa
@@ -278,18 +269,7 @@ MAX_FILE_SIZE=10485760  # 10MB
 UPLOAD_DIR=./temp_uploads
 ```
 
-### 🐳 Configuración con Docker (Opcional)
 
-```bash
-# Construir y ejecutar con Docker Compose
-docker-compose up --build
-
-# Solo construir
-docker-compose build
-
-# Ejecutar en background
-docker-compose up -d
-```
 
 ## 🔐 Sistema de Autenticación
 
@@ -452,19 +432,9 @@ El proyecto incluye un sistema completo de CI/CD con GitHub Actions:
 
 - **Se ejecuta**: En commits a master/main/develop
 - **Incluye**:
-  - Tests del frontend (lint, build)
-  - Validación del backend (syntax, lint)
-  - Notificaciones de deploy
-  - Check de dependencias (programado)
-
-#### 🚀 **3. Auto Deploy** (`auto-deploy.yml`)
-
-- **Se ejecuta**: Solo en commits a master/main
-- **Proceso**:
-  - Pre-deploy validation
-  - Build automático de frontend
-  - Validación de backend
-  - Notificaciones post-deploy
+  - Validación de sintaxis y estilo de código
+  - Build de prueba para verificar integridad
+  - Optimización de assets y recursos
 
 ### 📊 **Monitoreo**
 
@@ -623,7 +593,7 @@ python -m py_compile app/main.py
 - [ ] ⚡ Optimización de performance
 - [ ] 🧪 Cobertura de tests al 90%
 - [ ] 🐳 Containerización completa
-- [ ] ☁️ Deploy en cloud (AWS/GCP)
+- [ ] 🔧 Optimización de performance
 - [ ] 📈 Monitoreo y métricas
 - [ ] 🔍 Logging avanzado
 - [ ] 🛡️ Auditoría de seguridad
@@ -762,8 +732,8 @@ Internet → CORS → Rate Limiting → Authentication → File Validation → P
 
 | Herramienta        | Propósito          | Configuración                    |
 | ------------------ | ------------------ | -------------------------------- |
-| **GitHub Actions** | Pipeline CI/CD     | Auto-deploy, Testing, Linting    |
-| **Docker**         | Containerización   | Builds multi-etapa, Optimización |
+| **Vite**           | Build Tool         | Dev server, HMR, Optimización    |
+| **PostCSS**        | CSS Processing     | Autoprefixer, Optimización        |
 | **ESLint**         | Linting JavaScript | Reglas React, Mejores prácticas  |
 | **Prettier**       | Formateo de Código | Estilo consistente, Auto-formato |
 
@@ -773,9 +743,7 @@ Internet → CORS → Rate Limiting → Authentication → File Validation → P
 oncoderma/
 ├── 📁 .github/                           # GitHub Actions & Workflows
 │   └── workflows/
-│       ├── ci-cd.yml                    # Main CI/CD pipeline
-│       ├── commit-trigger.yml           # Commit notifications
-│       └── auto-deploy.yml              # Automated deployment
+
 │
 ├── 📁 frontend/                         # React Application
 │   ├── 📁 public/                       # Static Assets
@@ -866,10 +834,7 @@ oncoderma/
 ├── 📄 README.md                         # Project documentation
 ├── 📄 .env.example                      # Environment variables template
 ├── 📄 .gitignore                        # Git ignore rules
-├── 📄 docker-compose.yml                # Docker configuration
-├── 📄 netlify.toml                      # Netlify deployment config
-├── 📄 vercel.json                       # Vercel deployment config
-└── 📄 render.yaml                       # Render deployment config
+
 ```
 
 ## 🚀 Quick Start Commands
