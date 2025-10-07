@@ -289,6 +289,11 @@ export const initializeOptimizations = () => {
   optimizeWebVitals()
   lazyLoadImages()
   
+  // Inicializar optimizaciones de animación
+  import('./animationOptimizer.js').then(({ applyAnimationOptimizations }) => {
+    applyAnimationOptimizations()
+  })
+  
   // Configurar monitor de memoria
   const stopMemoryMonitor = monitorMemoryUsage((usage) => {
     console.log('💾 Memory usage:', usage)

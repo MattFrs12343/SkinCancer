@@ -6,7 +6,7 @@ import ResultsHeader from '../components/ui/ResultsHeader'
 import PrimaryResultCard from '../components/ui/PrimaryResultCard'
 import EnhancedDetailedAnalysis from '../components/ui/EnhancedDetailedAnalysis'
 
-import { EntranceAnimation, StaggeredAnimation } from '../components/ui/AnimationSystem'
+import { ResultsAnimation, InstantAnimation } from '../components/ui/OptimizedAnimationSystem'
 import { ResponsiveContainer } from '../components/ui/ResponsiveSystem'
 import { AccessibilityProvider } from '../components/ui/AccessibilitySystem'
 import { useImageAnalysis } from '../hooks/useImageAnalysis'
@@ -75,7 +75,7 @@ const Analizar = () => {
       <ResponsiveContainer maxWidth="2xl" className="py-8">
         <div className="space-y-8">
           {/* Enhanced Header */}
-          <EntranceAnimation type="fadeInUp">
+          <InstantAnimation type="fadeInUp">
             <div className="metric-card">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
@@ -93,7 +93,7 @@ const Analizar = () => {
               </div>
 
               {/* Enhanced Process Steps */}
-              <StaggeredAnimation staggerDelay={150}>
+              <InstantAnimation type="fadeInUp">
                 <div className="metric-grid">
                   {/* Paso 1: Subir imagen */}
                   <div className={`p-6 rounded-xl border-2 transition-all duration-300 ${
@@ -185,13 +185,13 @@ const Analizar = () => {
                     )}
                   </div>
                 </div>
-              </StaggeredAnimation>
+              </InstantAnimation>
             </div>
-          </EntranceAnimation>
+          </InstantAnimation>
 
           {/* Enhanced File Upload Area */}
           {!result && (
-            <EntranceAnimation type="fadeInScale" delay={300}>
+            <InstantAnimation type="fadeInScale">
               <div className="metric-card">
                 <FileUpload 
                   onFileSelect={handleFileSelect}
@@ -217,12 +217,12 @@ const Analizar = () => {
                   </div>
                 )}
               </div>
-            </EntranceAnimation>
+            </InstantAnimation>
           )}
 
           {/* Enhanced Analysis Progress */}
           {isAnalyzing && (
-            <EntranceAnimation type="fadeInUp">
+            <InstantAnimation type="fadeInUp">
               <div className="metric-card text-center">
                 <div className="mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mb-4">
@@ -245,14 +245,14 @@ const Analizar = () => {
                   </p>
                 </div>
               </div>
-            </EntranceAnimation>
+            </InstantAnimation>
           )}
 
           {/* Enhanced Results Dashboard */}
           {result && (
             <div ref={resultsRef} className="space-y-8">
               {/* Results Header */}
-              <EntranceAnimation type="fadeInUp">
+              <ResultsAnimation delay={0}>
                 <ResultsHeader
                   analysisStatus="completed"
                   processingTime={result.result?.processing_time || result.processingTime || 2.3}
@@ -260,20 +260,20 @@ const Analizar = () => {
                   timestamp={new Date()}
                   onNewAnalysis={handleNewAnalysis}
                 />
-              </EntranceAnimation>
+              </ResultsAnimation>
 
               {/* Primary Result Card */}
-              <EntranceAnimation type="fadeInScale" delay={200}>
+              <ResultsAnimation delay={100}>
                 <PrimaryResultCard
                   analysisResult={result}
                   onNewAnalysis={handleNewAnalysis}
                 />
-              </EntranceAnimation>
+              </ResultsAnimation>
 
               {/* Detailed Analysis */}
-              <EntranceAnimation type="fadeInUp" delay={400}>
+              <ResultsAnimation delay={200}>
                 <EnhancedDetailedAnalysis analysisResult={result} />
-              </EntranceAnimation>
+              </ResultsAnimation>
 
 
             </div>
@@ -281,7 +281,7 @@ const Analizar = () => {
 
           {/* Enhanced Error Display */}
           {error && (
-            <EntranceAnimation type="fadeInUp">
+            <InstantAnimation type="fadeInUp">
               <div className="metric-card">
                 <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-700 rounded-xl p-6">
                   <div className="flex items-start space-x-4">
@@ -320,7 +320,7 @@ const Analizar = () => {
                   </div>
                 </div>
               </div>
-            </EntranceAnimation>
+            </InstantAnimation>
           )}
         </div>
       </ResponsiveContainer>
